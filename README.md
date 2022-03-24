@@ -3,7 +3,7 @@
 Чат для себя и своих друзей, вы можете его установить на своем хостинге и наслаждаться общением без предград!
 
 ## Pull Request - Sprint 1
-https://github.com/matroskin92/middle.messenger.praktikum.yandex/pull/1
+[Pull Request](https://github.com/matroskin92/middle.messenger.praktikum.yandex/pull/1)
 
 ## Установка
 
@@ -13,3 +13,6 @@ https://github.com/matroskin92/middle.messenger.praktikum.yandex/pull/1
 - `npm start` — запуск версии для разработчика,
 - `npm run build` — сборка стабильной версии.
 - `node script.js` — запуск приложения
+
+## Ссылка на Netlify
+[Demo](https://deploy-preview-1--fascinating-licorice-5194e9.netlify.app/)
