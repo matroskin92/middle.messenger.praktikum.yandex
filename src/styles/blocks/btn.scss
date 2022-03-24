@@ -1,0 +1,48 @@
+.btn {
+  display: inline-flex;
+  margin: 0;
+  padding: 12px 20px;
+
+  color: $color-default-white;
+
+  font-weight: 500;
+  font-size: 13px;
+  line-height: 1;
+
+  border-radius: 8px;
+  background-color: $color-neon-blue;
+  border: none;
+  cursor: pointer;
+
+  transition: opacity $trans-default;
+
+  &--red {
+    background-color: $color-torch-red;
+  }
+
+  &--link {
+    background-color: transparent;
+    color: $color-neon-blue;
+  }
+
+  &--50 {
+    width: 50%;
+    justify-content: center;
+  }
+
+  &--100 {
+    width: 100%;
+    justify-content: center;
+  }
+
+  &:disabled {
+    opacity: 0.5;
+
+    pointer-events: none;
+  }
+
+  &:hover,
+  &:focus {
+    opacity: 0.8;
+  }
+}

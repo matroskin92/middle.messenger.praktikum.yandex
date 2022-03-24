@@ -1,0 +1,94 @@
+{
+  "info": [
+    {
+        "text": "Почта",
+        "value": "pochta@yandex.ru"
+    },
+    {
+        "text": "Логин",
+        "value": "ivanivanov"
+    },
+    {
+        "text": "Имя",
+        "value": "Иван"
+    },
+    {
+        "text": "Фамилия",
+        "value": "Иванов"
+    },
+    {
+        "text": "Имя в чате",
+        "value": "Иванов"
+    },
+    {
+        "text": "Телефон",
+        "value": "+7 (909) 967 30 30"
+    }
+  ],
+  "edit": [
+      {
+          "label": "E-mail",
+          "id": "email",
+          "type": "email",
+          "name": "email",
+          "value": "pochta@yandex.ru",
+          "error": "Введите корректный email"
+      },
+      {
+          "label": "Логин",
+          "id": "login",
+          "type": "test",
+          "name": "login",
+          "value": "mylogin",
+          "error": "Неверный логин"
+      },
+      {
+          "label": "Имя",
+          "id": "first-name",
+          "type": "text",
+          "name": "first_name",
+          "value": "Иван",
+          "error": "Не меньше 3 и не больше 32 символов"
+      },
+      {
+          "label": "Фамилия",
+          "id": "second-name",
+          "type": "text",
+          "name": "second_name",
+          "value": "Иванов",
+          "error": "Не меньше 3 и не больше 32 символов"
+      },
+      {
+          "label": "Имя в чате",
+          "id": "display-name",
+          "type": "text",
+          "name": "display_name",
+          "value": "Иваныч 99",
+          "error": "Не меньше 3 и не больше 32 символов"
+      },
+      {
+          "label": "Телефон",
+          "id": "phone",
+          "type": "text",
+          "name": "phone",
+          "value": "7 (999) 802-34-44",
+          "error": "Введите корректный номер телефона"
+      }
+  ],
+  "password": [
+      {
+          "label": "Пароль",
+          "id": "password",
+          "type": "password",
+          "name": "oldPassword",
+          "error": "Пароль не безопасен"
+      },
+      {
+          "label": "Пароль (ещё раз)",
+          "id": "confrim",
+          "type": "password",
+          "name": "newPassword",
+          "error": "Пароли не совпадают"
+      }
+  ]
+}

@@ -1,0 +1,27 @@
+.link {
+  position: relative;
+  display: inline-block;
+  font-weight: 500;
+  font-size: 13px;
+  line-height: 1;
+  color: #3369F3;
+
+  &:before {
+    content: "";
+    position: absolute;
+    top: 100%;
+    width: 100%;
+    border-bottom: 1px solid transparent;
+    transition: $trans-default;
+  }
+
+  &:hover {
+    &:before {
+      border-color: currentColor;
+    }
+  }
+
+  &--red {
+    color: #FF0000;
+  }
+}

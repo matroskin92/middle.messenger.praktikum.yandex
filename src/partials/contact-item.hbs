@@ -1,0 +1,11 @@
+<div class="chat-contact">
+  <div class="chat-contact__avatar">
+    <div class="chat-avatar">
+      <img src="../img/contact/{{this.image}}.png" srcset="../img/contact/{{this.image}}@2x.png 2x" width="48" height="48" alt="{{this.name}}">
+    </div>
+  </div><span class="chat-contact__name">{{this.name}}</span>
+  <div class="chat-contact__last">{{{this.text}}}</div><span class="chat-contact__time">{{this.date}}</span>
+  {{#if this.unread}}
+    <div class="chat-contact__count"><span>{{this.unread}}</span></div>
+  {{/if}}
+</div>

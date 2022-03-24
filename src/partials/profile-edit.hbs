@@ -1,0 +1,10 @@
+<form class="profile-form" action="/">
+  {{#each profile.edit}}
+    <div class="profile-form__item">
+      {{> input}}
+    </div>
+  {{/each}}
+  <div class="profile-form__submit">
+    <button class="btn btn--50" type="submit">Сохранить</button>
+  </div>
+</form>
