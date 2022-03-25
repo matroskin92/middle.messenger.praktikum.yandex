@@ -2,8 +2,8 @@
 
 Чат для себя и своих друзей, вы можете его установить на своем хостинге и наслаждаться общением без предград!
 
-## Pull Request - Sprint 1
-[Pull Request](https://github.com/matroskin92/middle.messenger.praktikum.yandex/pull/1)
+## Pull Requests
+[Pull Request Sprint 1](https://github.com/matroskin92/middle.messenger.praktikum.yandex/pull/1)
 
 ## Установка
 
