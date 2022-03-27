@@ -1,0 +1,10 @@
+<ul class="profile-summary">
+  {{#each profile.info}}
+    <li class="profile-summary__item">
+      <div class="profile-between">
+        <span>{{this.text}}</span>
+        <span>{{this.value}}</span>
+      </div>
+    </li>
+  {{/each}}
+</ul>
