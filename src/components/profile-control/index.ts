@@ -1,0 +1,1 @@
+export { ProfileControl as default } from './profile-control';
