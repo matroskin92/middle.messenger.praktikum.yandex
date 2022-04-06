@@ -1,7 +1,15 @@
 import Block from '../../core/Block';
 
+import photo1 from '../../img/messages/photo-1.png';
+
 export class ChatMessages extends Block {
+
+  constructor() {
+    super({photo1});
+  }
+
   protected render(): string {
+
     return `
       <div class="chat-messages">
         <div class="chat-messages__item chat-messages__date">19 июня</div>
@@ -64,7 +72,7 @@ export class ChatMessages extends Block {
         </div>
         <div class="chat-messages__item">
           <div class="chat-message chat-message--image">
-            <div class="chat-message__image"><img src="../img/messages/photo-1.png" width="316" height="211" alt=""></div>
+            <div class="chat-message__image"><img src="{{{photo1}}}" width="316" height="211" alt=""></div>
             <div class="chat-message__time">11:57</div>
           </div>
         </div>

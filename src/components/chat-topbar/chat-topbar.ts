@@ -1,11 +1,17 @@
 import Block from '../../core/Block';
 
+import imageContact from '../../img/contact/contact-1.png';
 export class ChatTopbar extends Block {
+
+  constructor() {
+    super({imageContact});
+  }
+
   protected render(): string {
     return `
       <div class="chat-topbar">
         <div class="chat-topbar__avatar">
-          <div class="chat-avatar"><img src="../img/contact/contact-1.png" srcset="../img/contact/contact-1@2x.png 2x" width="48" height="48" alt="Андрей">
+          <div class="chat-avatar"><img src="{{imageContact}}" width="48" height="48" alt="Андрей">
           </div>
         </div>
         <div class="chat-topbar__name">Андрей</div>

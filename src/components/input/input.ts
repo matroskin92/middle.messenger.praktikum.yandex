@@ -11,17 +11,19 @@ interface InputProps {
 }
 
 export class Input extends Block {
-  constructor({onChange = () => {}, type = 'text', label, error, placeholder, value}: InputProps) {
-    super({label, type, placeholder, value, error, events: {input: onChange}});
+  constructor({onChange = () => {}, type = 'text', name, label, error, placeholder, value}: InputProps) {
+    super({label, type, name, placeholder, value, error, events: {input: onChange}});
   }
 
   protected render(): string {
     return `
       <div class="custom-input">
         <label><span class="custom-input__label">{{label}}</span>
-          <input type="{{type}}" id="input-{{id}}" name="{{name}}" value="{{value}}">
+          <input type="{{type}}" name="{{name}}" value="{{value}}" placeholder="{{placeholder}}">
         </label>
-        <div class="custom-input__error">{{error}}</div>
+        {{#if error}}
+          <div class="custom-input__error">{{error}}</div>
+        {{/if}}
       </div>
     `
   }
