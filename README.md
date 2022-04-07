@@ -10,9 +10,8 @@
 Вы можете быстро собрать проект с помощью следующих команд
 
 - `npm install` — установка стабильной версии,
-- `npm start` — запуск версии для разработчика,
-- `npm run build` — сборка стабильной версии.
-- `node script.js` — запуск приложения
+- `npm run start` — запуск приложения
+- `npm run dev` — для разработчика
 
 ## Ссылка на Netlify
 [Demo](https://deploy-preview-1--fascinating-licorice-5194e9.netlify.app/)
