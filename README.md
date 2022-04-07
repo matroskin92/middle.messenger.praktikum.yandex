@@ -17,4 +17,4 @@
 - `node script.js` — запуск приложения
 
 ## Ссылка на Netlify
-[Demo](https://deploy-preview-1--fascinating-licorice-5194e9.netlify.app/)
+[Demo](https://thriving-marigold-e97349.netlify.app/)
