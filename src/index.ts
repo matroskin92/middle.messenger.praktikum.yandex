@@ -13,6 +13,8 @@ import './styles/style.scss';
 
 import Link from './components/link';
 import Input from './components/input';
+import Textarea from './components/textarea';
+import CustomInput from './components/custom-input';
 import Button from './components/button';
 import Error from './components/error';
 import ChatAside from './components/chat-aside';
@@ -30,9 +32,13 @@ import ProfileInfo from './components/profile-info';
 import ProfileControl from './components/profile-control';
 import ProfileEdit from './components/profile-edit';
 import ProfilePassword from './components/profile-password';
+import Login from './components/login';
+import Signin from './components/signin';
 
 registerComponent(Link);
 registerComponent(Input);
+registerComponent(Textarea);
+registerComponent(CustomInput);
 registerComponent(Button);
 registerComponent(Error);
 registerComponent(ChatAside);
@@ -50,6 +56,8 @@ registerComponent(ProfileInfo);
 registerComponent(ProfileControl);
 registerComponent(ProfileEdit);
 registerComponent(ProfilePassword);
+registerComponent(Login);
+registerComponent(Signin);
 
 // const components = require('./components/**/index.ts') as {[key: string]: { default: typeof Block }};
 
