@@ -2,8 +2,15 @@
   "name": "chat",
   "version": "1.0.1",
   "scripts": {
-    "build": "parcel build src/index.html --no-cache",
-    "start": "parcel src/index.html --port 3000 --no-cache"
+    "start": "parcel build src/index.html --no-cache && node server.js",
+    "dev": "parcel src/index.html --port 3000 --no-cache"
+  },
+  "targets": {
+    "default": {
+      "engines": {
+        "browsers": ">= 50%"
+      }
+    }
   },
   "devDependencies": {
     "@anikin/parcel-transformer-handlebars": "1.0.9",
