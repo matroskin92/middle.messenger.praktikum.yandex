@@ -2,7 +2,8 @@
   "name": "chat",
   "version": "1.0.1",
   "scripts": {
-    "start": "parcel build src/index.html --no-cache && node server.js",
+    "start": "npm run build && node server.js",
+    "build": "parcel build src/index.html --no-cache",
     "dev": "parcel src/index.html --port 3000 --no-cache"
   },
   "targets": {
