@@ -11,7 +11,7 @@ export class ProfileAvatar extends Block {
 
   protected render(): string {
     return `
-      <a class="profile-avatar" href="./profile-edit.html">
+      <a class="profile-avatar" href="index.html#profile-edit">
         <div class="profile-avatar__image">
           <img src="{{imageContact1}}" width="130" height="130" alt="alt">
         </div>

@@ -8,7 +8,7 @@ export class SigninPage extends Block {
           <h1 class="card__title">Вход</h1>
           {{{Signin}}}
           <div class="card-footer">
-            {{{Link text="Уже есть аккаунт?" color="link" size="100" href="login.html"}}}
+            {{{Link text="Уже есть аккаунт?" color="link" size="100" href="index.html#login"}}}
           </div>
         </div>
       </main>

@@ -1,4 +1,4 @@
-import { Block, renderDOM, registerComponent }  from './core';
+import { renderDOM, registerComponent }  from './core';
 import MainPage from './pages/main/index';
 import LoginPage from './pages/login';
 import SigninPage from './pages/signin';
@@ -60,7 +60,7 @@ registerComponent(Login);
 registerComponent(Signin);
 
 document.addEventListener("DOMContentLoaded", () => {
-  const currentPage = window.location.pathname;
+  const currentPage = window.location.hash;
 
   if (currentPage.includes('login')) {
     renderDOM(LoginPage);

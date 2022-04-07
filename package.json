@@ -2,7 +2,7 @@
   "name": "chat",
   "version": "1.0.1",
   "scripts": {
-    "build": "parcel build src/index.html --no-cache --public-url ./",
+    "build": "parcel build src/index.html --no-cache",
     "start": "parcel src/index.html --port 3000 --no-cache"
   },
   "devDependencies": {
