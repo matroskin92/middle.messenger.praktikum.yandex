@@ -59,12 +59,6 @@ registerComponent(ProfilePassword);
 registerComponent(Login);
 registerComponent(Signin);
 
-// const components = require('./components/**/index.ts') as {[key: string]: { default: typeof Block }};
-
-// Object.values(components).forEach((component) => {
-//   registerComponent(component.default);
-// });
-
 document.addEventListener("DOMContentLoaded", () => {
   const currentPage = window.location.pathname;
 
