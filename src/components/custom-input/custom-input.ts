@@ -13,7 +13,11 @@ interface CustomInputProps {
 }
 
 export class CustomInput extends Block {
-  constructor({onChange = () => {}, onFocus = () => {}, onBlur = () => {}, type = 'text', name, label, error, placeholder, value}: CustomInputProps) {
+  constructor({
+    onChange = () => {},
+    onFocus = () => {},
+    onBlur = () => {},
+    type = 'text', name, label, error, placeholder, value}: CustomInputProps) {
     super({label, type, name, placeholder, value, error, onChange, onFocus, onBlur});
   }
 
