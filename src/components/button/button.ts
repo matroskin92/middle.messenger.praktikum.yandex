@@ -1,4 +1,3 @@
-import { type } from 'os';
 import Block from '../../core/Block';
 
 interface ButtonProps {

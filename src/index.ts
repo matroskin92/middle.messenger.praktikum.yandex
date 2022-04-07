@@ -62,6 +62,8 @@ registerComponent(Signin);
 document.addEventListener("DOMContentLoaded", () => {
   const currentPage = window.location.hash;
 
+  console.log(currentPage);
+
   if (currentPage.includes('login')) {
     renderDOM(LoginPage);
   } else if (currentPage.includes('signin')) {
