@@ -2,9 +2,8 @@
   "name": "chat",
   "version": "1.0.1",
   "scripts": {
-    "dev": "parcel src/index.html --no-cache --port 3000",
     "build": "parcel build src/index.html --no-cache --public-url ./",
-    "start": "npm run build && node server.js"
+    "start": "parcel src/index.html --port 3000 --no-cache"
   },
   "devDependencies": {
     "@anikin/parcel-transformer-handlebars": "1.0.9",
