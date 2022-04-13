@@ -1,6 +1,21 @@
 import Block from '../../core/Block';
 import Validate from '../../utils/validate';
 
+interface HTMLInputElement {
+  value: string,
+  name: string
+}
+
+interface MouseEvent {
+  preventDefault(): void,
+  currentTarget: HTMLInputElement
+}
+
+interface LoginData {
+  login: string,
+  password: string
+}
+
 export class Login extends Block {
 
   protected getStateFromProps() {
@@ -16,9 +31,9 @@ export class Login extends Block {
       onSubmit: (event: MouseEvent) => {
         event?.preventDefault();
 
-        const loginData = {
-          login: (this.refs.login.querySelector('input') as HTMLInputElement).value,
-          password: (this.refs.password.querySelector('input') as HTMLInputElement).value
+        const loginData: LoginData = {
+          login: this.refs.login.querySelector('input')?.value ?? '',
+          password: this.refs.password.querySelector('input')?.value ?? ''
         };
 
         const nextState = {
@@ -34,8 +49,8 @@ export class Login extends Block {
         console.log('action/login', loginData);
       },
       onInputValidate: (event: MouseEvent) => {
-        const inputName: string = (event.currentTarget as HTMLInputElement).name;
-        const inputValue: string = (event.currentTarget as HTMLInputElement).value;
+        const inputName: string = event.currentTarget?.name;
+        const inputValue: string = event.currentTarget?.value;
         const currentValues = {...this.state.values};
 
         if (inputValue.length === 0 && currentValues[inputName].length === 0) return;
