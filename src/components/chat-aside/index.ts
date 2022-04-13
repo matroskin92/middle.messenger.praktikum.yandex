@@ -1,0 +1,1 @@
+export { ChatAside as default } from './chat-aside';

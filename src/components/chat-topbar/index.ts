@@ -1,0 +1,1 @@
+export { ChatTopbar as default } from './chat-topbar';

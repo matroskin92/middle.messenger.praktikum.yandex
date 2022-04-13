@@ -448,11 +448,17 @@
     font-weight: 500;
     font-size: 12px;
     line-height: 1;
+    border: 1px solid transparent;
 
     &::placeholder {
       color: #999999;
     }
+  }
 
+  &--error {
+    textarea {
+      border-color: tomato;
+    }
   }
 }
 

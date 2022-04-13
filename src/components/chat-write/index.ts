@@ -1,0 +1,1 @@
+export { ChatWrite as default } from './chat-write';
