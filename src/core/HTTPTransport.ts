@@ -1,19 +1,18 @@
 import { queryStringify } from '../utils';
 
-const Methods = {
-    GET: 'GET',
-    POST: 'POST',
-    PUT: 'PUT',
-    DELETE: 'DELETE',
-};
+const enum Methods {
+    GET = 'GET',
+    POST = 'POST',
+    PUT = 'PUT',
+    DELETE = 'DELETE',
+}
 
 type Options = {
     headers?: Record<string, string>,
-    method?: string,
+    method?: Methods,
     timeout?: number,
     data?: Record<string, unknown>
 }
-
 export default class HTTPTransport {
     get = (url: string, options: Options = {}) => {
         return this.request(url, { ...options, method: Methods.GET }, options.timeout);
