@@ -1,3 +1,4 @@
+import { Router } from '../../core';
 import Block from '../../core/Block';
 
 interface LinkProps {
@@ -9,7 +10,15 @@ interface LinkProps {
 
 export class Link extends Block {
   constructor({text, color, size, href}: LinkProps) {
-    super({text, color, size, href});
+
+    const onClick = (event: MouseEvent) => {
+      event.preventDefault();
+
+      const router = new Router();
+      router.go(this.props.href);
+    };
+
+    super({text, color, size, href, events: {click: onClick}});
   }
 
   render() {

@@ -6,6 +6,11 @@ interface BlockMeta<P = any> {
   props: P;
 }
 
+export interface BlockClass<P> extends Function {
+  new (props: P): Block<P>;
+  componentName?: string;
+}
+
 type Events = Values<typeof Block.EVENTS>;
 
 export default class Block<P = any> {

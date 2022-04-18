@@ -1,4 +1,4 @@
-import { renderDOM, registerComponent }  from './core';
+import { registerComponent, Router }  from './core';
 import MainPage from './pages/main/index';
 import LoginPage from './pages/login';
 import SigninPage from './pages/signin';
@@ -59,29 +59,17 @@ registerComponent(ProfilePassword, 'ProfilePassword');
 registerComponent(Login, 'Login');
 registerComponent(Signin, 'Signin');
 
-document.addEventListener("DOMContentLoaded", () => {
-  const currentPage = window.location.hash;
-
-  console.log(currentPage);
-
-  if (currentPage.includes('login')) {
-    renderDOM(LoginPage);
-  } else if (currentPage.includes('signin')) {
-    renderDOM(SigninPage);
-  } else if (currentPage.includes('404')) {
-    renderDOM(NotFoundPage);
-  } else if (currentPage.includes('500')) {
-    renderDOM(ServerErrorPage);
-  } else if (currentPage.includes('chat')) {
-    renderDOM(ChatPage);
-  } else if (currentPage.includes('profile-edit')) {
-    renderDOM(ProfileEditPage);
-  } else if (currentPage.includes('profile-password')) {
-    renderDOM(ProfilePasswordPage);
-  } else if (currentPage.includes('profile')) {
-    renderDOM(ProfilePage);
-  } else {
-    renderDOM(MainPage);
-  }
-
-});
+document.addEventListener('DOMContentLoaded', () => {
+  const router = new Router('#app');
+  router
+    .use('/', MainPage)
+    .use('/login', LoginPage)
+    .use('/signup', SigninPage)
+    .use('/profile', ProfilePage)
+    .use('/profile-edit', ProfileEditPage)
+    .use('/profile-password', ProfilePasswordPage)
+    .use('/chat', ChatPage)
+    .use('/404', NotFoundPage)
+    .use('/500', ServerErrorPage)
+    .start()
+})

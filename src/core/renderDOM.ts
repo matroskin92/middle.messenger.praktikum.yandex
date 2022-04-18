@@ -1,10 +1,9 @@
 import Block from './Block';
 
-export default function renderDOM(BlockPage: typeof Block) {
-  const block = new BlockPage();
-
-  const root = document.querySelector('#app');
+export default function renderDOM(query: string | undefined, block: Block) {
+  const root = document.querySelector(query as string);
   
   root!.innerHTML = '';
   root!.appendChild(block.getContent());
+  return root;
 }

@@ -5,7 +5,7 @@ export class ChatToggle extends Block {
 
     const onClick = (e: MouseEvent) => {
       e.preventDefault();
-      location.href = 'index.html#chat';
+      location.href = '/chat';
     }
 
     super({events: { click: onClick }});

@@ -13,7 +13,7 @@ export class ChatProfile extends Block {
     return `
       <div class="chat-profile">
         <span class="chat-profile__name">{{display_name}}</span>
-        <a class="chat-profile__link" href="index.html#profile">
+        <a class="chat-profile__link" href="/profile">
           Профиль
           <svg width="4" height="8" aria-hidden="true">
             <use xlink:href="#icon-profile"></use>
