@@ -1,11 +1,14 @@
 import Block from '../../core/Block';
+import { Router } from '../../core';
 
 export class ChatToggle extends Block {
   constructor() {
 
     const onClick = (e: MouseEvent) => {
       e.preventDefault();
-      location.href = '/chat';
+
+      const router = new Router();
+      router.go('/chat');
     }
 
     super({events: { click: onClick }});

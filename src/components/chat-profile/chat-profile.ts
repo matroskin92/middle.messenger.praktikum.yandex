@@ -1,4 +1,5 @@
 import Block from '../../core/Block';
+import { Router } from '../../core';
 
 interface ButtonProps {
   display_name: string;
@@ -6,7 +7,15 @@ interface ButtonProps {
 
 export class ChatProfile extends Block {
   constructor({display_name}: ButtonProps) {
-    super({display_name});
+
+    const onClick = (e: MouseEvent) => {
+      e.preventDefault();
+
+      const router = new Router();
+      router.go('/profile');
+    }
+
+    super({display_name, events: { click: onClick }});
   }
 
   protected render(): string {

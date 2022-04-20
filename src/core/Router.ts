@@ -43,8 +43,6 @@ export default class Router {
       this._currentRoute.leave();
     }
 
-    console.log(route, pathname);
-
     this._currentRoute = route;
     route.render(route, pathname);
   }
