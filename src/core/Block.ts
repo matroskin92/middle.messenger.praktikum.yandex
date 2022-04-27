@@ -232,12 +232,16 @@ export default class Block<P = any> {
     return fragment.content;
   }
 
+  public destroy() {
+    this._element?.remove();
+  }
 
   show() {
     this.getContent().style.display = 'block';
   }
 
   hide() {
+    console.log('hide', this.getContent());
     this.getContent().style.display = 'none';
   }
 }
