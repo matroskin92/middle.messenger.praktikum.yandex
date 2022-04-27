@@ -1,6 +1,6 @@
 import MainPage from '../pages/main/index';
 import LoginPage from '../pages/login';
-import SigninPage from '../pages/signin';
+import SigninPage from '../pages/signup';
 import NotFoundPage from '../pages/not_found';
 import ServerErrorPage from '../pages/server_error';
 import ChatPage from '../pages/chat';

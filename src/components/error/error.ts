@@ -16,7 +16,7 @@ export class Error extends Block {
         <h1 class="error__title">{{code}}</h1>
         <p class="error__text">{{text}}</p>
         <div class="error__back">
-          {{{Link color="link" href="/chat" text="Назад к чатам"}}}
+          {{{Link color="link" href="/messenger" text="Назад к чатам"}}}
         </div>
       </div>
     `;

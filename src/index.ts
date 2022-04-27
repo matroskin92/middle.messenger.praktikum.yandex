@@ -3,9 +3,8 @@ import { diffObjectsDeep, getScreenComponent }  from './utils';
 import { defaultState } from './store';
 
 // Pages
-import MainPage from './pages/main/index';
 import LoginPage from './pages/login';
-import SigninPage from './pages/signin';
+import SignupPage from './pages/signup';
 import NotFoundPage from './pages/not_found';
 import ServerErrorPage from './pages/server_error';
 import ChatPage from './pages/chat';
@@ -104,13 +103,12 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 
   router
-    .use('/', MainPage)
-    .use('/login', LoginPage)
-    .use('/signup', SigninPage)
-    .use('/profile', ProfilePage)
-    .use('/profile-edit', ProfileEditPage)
-    .use('/profile-password', ProfilePasswordPage)
-    .use('/chat', ChatPage)
+    .use('/', LoginPage)
+    .use('/sign-up', SignupPage)
+    .use('/settings', ProfilePage)
+    .use('/settings-edit', ProfileEditPage)
+    .use('/settings-password', ProfilePasswordPage)
+    .use('/messenger', ChatPage)
     .use('/404', NotFoundPage)
     .use('/500', ServerErrorPage)
     .start()
