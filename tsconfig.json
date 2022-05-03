@@ -2,6 +2,7 @@
   "compilerOptions": {
     "target": "es2017",
     "module": "commonjs",
+    "baseUrl": "./src",
     "typeRoots": ["node_modules/@types", "typings/app.d.ts"],
     "sourceMap": true,
     "esModuleInterop": true,
@@ -12,5 +13,6 @@
     "noUnusedLocals": true,
     "noUnusedParameters": true,
     "skipLibCheck": true
-  }
+  },
+  "exclude": [],
 }

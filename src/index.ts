@@ -1,16 +1,7 @@
 import { renderDOM, registerComponent, Router, Store }  from './core';
 import { diffObjectsDeep, getScreenComponent }  from './utils';
 import { defaultState } from './store';
-
-// Pages
-import LoginPage from './pages/login';
-import SignupPage from './pages/signup';
-import NotFoundPage from './pages/not_found';
-import ServerErrorPage from './pages/server_error';
-import ChatPage from './pages/chat';
-import ProfilePage from './pages/profile';
-import ProfileEditPage from './pages/profile-edit';
-import ProfilePasswordPage from './pages/profile-password';
+import { Screens, AppState } from './types';
 
 import './styles/style.scss';
 
@@ -74,17 +65,9 @@ document.addEventListener('DOMContentLoaded', () => {
   const store = new Store<AppState>(defaultState);
   const router = new Router('#app');
 
-  /**
-   * Помещаем роутер и стор в глобальную область для доступа в хоках with*
-   * @warning Не использовать такой способ на реальный проектах
-   */
   window.router = router;
   window.store = store;
 
-  /**
-   * Глобальный слушатель изменений в сторе
-   * для переключения активного экрана
-   */
   store.on('changed', (prevState, nextState) => {
     // if (process.env.DEBUG) {
       console.log(
@@ -98,18 +81,17 @@ document.addEventListener('DOMContentLoaded', () => {
     // router.go(window.location.pathname);
     if (prevState.screen !== nextState.screen) {
       const Page = getScreenComponent(nextState.screen);
-      renderDOM(new Page());
+      renderDOM('#app', new Page());
     }
   });
 
   router
-    .use('/', LoginPage)
-    .use('/sign-up', SignupPage)
-    .use('/settings', ProfilePage)
-    .use('/settings-edit', ProfileEditPage)
-    .use('/settings-password', ProfilePasswordPage)
-    .use('/messenger', ChatPage)
-    .use('/404', NotFoundPage)
-    .use('/500', ServerErrorPage)
+    .use(Screens.Login, getScreenComponent(Screens.Login))
+    .use(Screens.Signup, getScreenComponent(Screens.Signup))
+    .use(Screens.Profile, getScreenComponent(Screens.Profile))
+    .use(Screens.ProfileEdit, getScreenComponent(Screens.ProfileEdit))
+    .use(Screens.ProfilePassword, getScreenComponent(Screens.ProfilePassword))
+    .use(Screens.NotFound, getScreenComponent(Screens.NotFound))
+    .use(Screens.ServerError, getScreenComponent(Screens.ServerError))
     .start()
-})
+});

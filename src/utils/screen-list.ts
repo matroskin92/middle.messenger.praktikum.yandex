@@ -7,19 +7,9 @@ import ProfilePage from '../pages/profile';
 import ProfileEditPage from '../pages/profile-edit';
 import ProfilePasswordPage from '../pages/profile-password';
 import { Block } from '../core';
+import { Screens } from '../types';
 
-export enum Screens {
-  Login = '/',
-  Signup = 'sign-up',
-  Chat = 'messenger',
-  Profile = 'profile',
-  ProfileEdit = 'profile-edit',
-  ProfilePassword = 'profile-password',
-  NotFound = '404',
-  ServerError = '500',
-}
-
-const map: Record<Screens, typeof Block> = {
+const ScreenList: Record<Screens, typeof Block> = {
   [Screens.Login]: LoginPage,
   [Screens.Signup]: SignupPage,
   [Screens.Chat]: ChatPage,
@@ -30,8 +20,6 @@ const map: Record<Screens, typeof Block> = {
   [Screens.ServerError]: ServerErrorPage,
 };
 
-const getScreenComponent = (screen: Screens): typeof Block => {
-  return map[screen];
+export const getScreenComponent = (screen: Screens): typeof Block => {
+  return ScreenList[screen];
 };
-
-export default getScreenComponent;

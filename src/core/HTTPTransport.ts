@@ -8,26 +8,41 @@ const enum Methods {
 }
 
 type Options = {
+    includeCredentials?: boolean,
     headers?: Record<string, string>,
     method?: Methods,
     timeout?: number,
-    data?: Record<string, unknown>
+    data?: Record<string, any> | {} | null
 }
 export default class HTTPTransport {
+    path: string
+
+    constructor(route: string) {
+        this.path = route
+    }
+
     get = (url: string, options: Options = {}) => {
-        return this.request(url, { ...options, method: Methods.GET }, options.timeout);
+        return this.request(`${process.env.API_ENDPOINT}/${this.path}/${url}`, {
+            ...options, method: Methods.GET
+        }, options.timeout);
     };
 
     post = (url: string, options: Options = {}) => {
-        return this.request(url, { ...options, method: Methods.POST }, options.timeout);
+        return this.request(`${process.env.API_ENDPOINT}/${this.path}/${url}`, {
+            ...options, method: Methods.POST
+        }, options.timeout);
     };
 
     put = (url: string, options: Options = {}) => {
-        return this.request(url, { ...options, method: Methods.PUT }, options.timeout);
+        return this.request(`${process.env.API_ENDPOINT}/${this.path}/${url}`, {
+            ...options, method: Methods.PUT
+        }, options.timeout);
     };
 
     delete = (url: string, options: Options = {}) => {
-        return this.request(url, { ...options, method: Methods.DELETE }, options.timeout);
+        return this.request(`${process.env.API_ENDPOINT}/${this.path}/${url}`, {
+            ...options, method: Methods.DELETE
+        }, options.timeout);
     };
 
     request = (url: string, options: Options = {}, timeout = 5000) => {
