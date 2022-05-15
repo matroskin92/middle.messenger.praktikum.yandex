@@ -7,7 +7,17 @@ import ProfilePage from '../pages/profile';
 import ProfileEditPage from '../pages/profile-edit';
 import ProfilePasswordPage from '../pages/profile-password';
 import { Block } from '../core';
-import { Screens } from '../types';
+
+export enum Screens {
+  Login = '/',
+  Signup = '/sign-up',
+  Chat = '/messenger',
+  Profile = '/settings',
+  ProfileEdit = '/settings-edit',
+  ProfilePassword = '/settings-password',
+  NotFound = '/404',
+  ServerError = '/500'
+}
 
 const ScreenList: Record<Screens, typeof Block> = {
   [Screens.Login]: LoginPage,

@@ -1,7 +1,5 @@
 import { renderDOM, registerComponent, Router, Store }  from './core';
-import { diffObjectsDeep, getScreenComponent }  from './utils';
-import { defaultState } from './store';
-import { Screens, AppState } from './types';
+import { diffObjectsDeep, getScreenComponent, Screens }  from './utils';
 
 import './styles/style.scss';
 
@@ -27,7 +25,7 @@ import ProfileControl from './components/profile-control';
 import ProfileEdit from './components/profile-edit';
 import ProfilePassword from './components/profile-password';
 import Login from './components/login';
-import Signin from './components/signin';
+import SingUp from './components/signup';
 
 registerComponent(Link, 'Link');
 registerComponent(Input, 'Input');
@@ -51,14 +49,13 @@ registerComponent(ProfileControl, 'ProfileControl');
 registerComponent(ProfileEdit, 'ProfileEdit');
 registerComponent(ProfilePassword, 'ProfilePassword');
 registerComponent(Login, 'Login');
-registerComponent(Signin, 'Signin');
+registerComponent(SingUp, 'SingUp');
 
-declare global {
-  interface Window {
-    store: Store<AppState>;
-    router: Router;
-  }
-}
+const defaultState: AppState = {
+  isLoading: false,
+  screen: null,
+  user: null,
+};
 
 document.addEventListener('DOMContentLoaded', () => {
 
@@ -68,17 +65,16 @@ document.addEventListener('DOMContentLoaded', () => {
   window.router = router;
   window.store = store;
 
-  store.on('changed', (prevState, nextState) => {
-    // if (process.env.DEBUG) {
+  store.on('changed', (prevState: AppState, nextState: AppState) => {
+    if (process.env.DEBUG) {
       console.log(
         '%cstore updated',
         'background: #222; color: #bada55',
         nextState,
       );
       console.log(JSON.stringify(diffObjectsDeep.map(prevState, nextState)));
-    // }
+    }
 
-    // router.go(window.location.pathname);
     if (prevState.screen !== nextState.screen) {
       const Page = getScreenComponent(nextState.screen);
       renderDOM('#app', new Page());
@@ -88,6 +84,7 @@ document.addEventListener('DOMContentLoaded', () => {
   router
     .use(Screens.Login, getScreenComponent(Screens.Login))
     .use(Screens.Signup, getScreenComponent(Screens.Signup))
+    .use(Screens.Chat, getScreenComponent(Screens.Chat))
     .use(Screens.Profile, getScreenComponent(Screens.Profile))
     .use(Screens.ProfileEdit, getScreenComponent(Screens.ProfileEdit))
     .use(Screens.ProfilePassword, getScreenComponent(Screens.ProfilePassword))

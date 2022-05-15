@@ -74,7 +74,7 @@ export default class HTTPTransport {
 
             xhr.onabort = reject;
             xhr.onerror = reject;
-
+            xhr.withCredentials = true;
             xhr.timeout = timeout;
             xhr.ontimeout = reject;
 

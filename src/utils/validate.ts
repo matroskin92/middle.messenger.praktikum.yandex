@@ -1,4 +1,4 @@
-export default function Validate(name: string, value: string): string {
+function test(name: string, value: string): string {
 
   const patterns:{ [key: string]: RegExp } = {
     'name': /^[-a-zA-Zа-яА-ЯёЁ0-9\s]+$/,
@@ -65,6 +65,23 @@ export default function Validate(name: string, value: string): string {
   }
 
   return '';
+}
 
-  // return 'Проблема в валидаторе';
+export function Validate(data: TStringObject): TStringObject {
+  const errors: TStringObject = {};
+  for (let key in data) {
+    const result = test(key, data[key]);
+    errors[key] = result ? result : '';
+  }
+
+  return errors;
+}
+
+export function isValid(data: TStringObject): boolean {
+  let isError: number | boolean = true;
+  for (let key in data) {
+    isError = data[key].length ?? false;
+  }
+
+  return isError;
 }

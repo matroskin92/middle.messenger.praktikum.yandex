@@ -12,7 +12,7 @@ export class ChatProfile extends Block {
       e.preventDefault();
 
       const router = new Router();
-      router.go('/profile');
+      router.go('/settings');
     }
 
     super({display_name, events: { click: onClick }});

@@ -1,0 +1,1 @@
+export { SingUp as default } from './signup';
