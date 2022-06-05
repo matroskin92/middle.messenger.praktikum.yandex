@@ -1,33 +1,40 @@
 import Block from '../../core/Block';
-import { Router } from '../../core';
-
-interface ButtonProps {
-  display_name: string;
-}
 
 export class ChatProfile extends Block {
-  constructor({display_name}: ButtonProps) {
+  constructor() {
 
     const onClick = (e: MouseEvent) => {
       e.preventDefault();
 
-      const router = new Router();
-      router.go('/settings');
+      window.store.dispatch({'screen': '/settings'});
     }
 
-    super({display_name, events: { click: onClick }});
+    super({events: { click: onClick }});
+  }
+
+  async componentDidMount() {
+    this.setState({
+      ...this.state,
+      user: window.store.getState().user
+    });
+  }
+
+  protected getStateFromProps() {
+    this.state = {
+      user: null,
+    }
   }
 
   protected render(): string {
     return `
       <div class="chat-profile">
-        <span class="chat-profile__name">{{display_name}}</span>
-        <a class="chat-profile__link" href="/settings">
+        <span class="chat-profile__name">{{user.firstName}}</span>
+        <div class="chat-profile__link">
           Профиль
           <svg width="4" height="8" aria-hidden="true">
             <use xlink:href="#icon-profile"></use>
           </svg>
-        </a>
+        </div>
       </div>
     `;
   }

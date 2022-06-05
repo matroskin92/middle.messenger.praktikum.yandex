@@ -1,5 +1,6 @@
 import Block from '../../core/Block';
 import {Validate, isValid} from '../../utils/validate';
+import diffObjectsDeep from '../../utils/diffObjectsDeep';
 import AuthController from '../../controllers/auth';
 
 interface HTMLInputElement {
@@ -57,6 +58,7 @@ export class Login extends Block {
         const currentValues = {...this.state.values};
 
         if (inputValue.length === 0 && currentValues[inputName].length === 0) return;
+        if (inputValue === currentValues[inputName]) return;
 
         const validateResult = Validate({[inputName]: inputValue});
 
@@ -65,8 +67,7 @@ export class Login extends Block {
           errors: {...this.state.errors, ...Object.defineProperty({...this.state.errors}, inputName, {value: validateResult[inputName]})}
         };
 
-        // Плохой метод, но в качестве упрощения
-        if (JSON.stringify({...this.state}) !== JSON.stringify({...nextState}) ) {
+        if (diffObjectsDeep.compareValues(this.state, nextState)) {
           this.setState(nextState);
         }
       }

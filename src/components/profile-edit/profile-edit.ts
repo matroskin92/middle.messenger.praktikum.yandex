@@ -2,6 +2,19 @@ import Block from '../../core/Block';
 
 export class ProfileEdit extends Block {
 
+  async componentDidMount() {
+    this.setState({
+      ...this.state,
+      user: window.store.getState().user
+    });
+  }
+
+  protected getStateFromProps() {
+    this.state = {
+      user: null,
+    }
+  }
+
   protected render(): string {
     return `
       <form class="profile-form" action="/">
@@ -10,7 +23,7 @@ export class ProfileEdit extends Block {
               label="E-mail"
               name="email"
               type="email"
-              value="pochta@yandex.ru"
+              value=user.email
           }}}
         </div>
         <div class="profile-form__item">
@@ -18,14 +31,15 @@ export class ProfileEdit extends Block {
               label="Логин"
               name="login"
               type="text"
-              value="mylogin"
+              value=user.login
           }}}
         </div>
         <div class="profile-form__item">
           {{{CustomInput
               label="Имя"
               name="first_name"
-              type="text" value="Иван"
+              type="text"
+              value=user.firstName
           }}}
         </div>
         <div class="profile-form__item">
@@ -33,7 +47,7 @@ export class ProfileEdit extends Block {
             label="Фамилия"
             name="second_name"
             type="text"
-            value="Иванов"
+            value=user.secondName
           }}}
         </div>
         <div class="profile-form__item">
@@ -41,7 +55,7 @@ export class ProfileEdit extends Block {
             label="Имя в чате"
             name="display_name"
             type="text"
-            value="Иваныч 99"
+            value=user.displayName
           }}}
         </div>
         <div class="profile-form__item">
@@ -49,7 +63,7 @@ export class ProfileEdit extends Block {
             label="Телефон"
             name="phone"
             type="text"
-            value="7 (999) 802-34-44"
+            value=user.phone
           }}}
         </div>
         <div class="profile-form__submit">

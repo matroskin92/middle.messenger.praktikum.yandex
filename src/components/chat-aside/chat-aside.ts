@@ -6,7 +6,7 @@ export class ChatAside extends Block {
     return `
       <div class="chat-aside">
         <div class="chat-aside__profile">
-          {{{ChatProfile display_name="Василий Пупкин" }}}
+          {{{ChatProfile}}}
         </div>
         <div class="chat-aside__search">
           {{{ChatSearch}}}

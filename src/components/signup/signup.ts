@@ -1,5 +1,6 @@
 import Block from '../../core/Block';
 import {Validate, isValid} from '../../utils/validate';
+import diffObjectsDeep from '../../utils/diffObjectsDeep';
 import AuthController from '../../controllers/auth';
 
 interface HTMLInputElement {
@@ -50,28 +51,30 @@ export class SingUp extends Block {
 
         this.setState(nextState);
 
-        if (!ValidationResult) {
+        if (!isValid(ValidationResult)) {
           await AuthController.signUp(SingUpData);
         }
 
       },
-      // onInputValidate: (event: MouseEvent) => {
-      //   const inputName: string = (event.currentTarget as HTMLInputElement).name;
-      //   const inputValue: string = (event.currentTarget as HTMLInputElement).value;
-      //   const currentValues = {...this.state.values};
+      onInputValidate: (event: MouseEvent) => {
+        const inputName: string = (event.currentTarget as HTMLInputElement).name;
+        const inputValue: string = (event.currentTarget as HTMLInputElement).value;
+        const currentValues = {...this.state.values};
 
-      //   if (inputValue.length === 0 && currentValues[inputName].length === 0) return;
+        if (inputValue.length === 0 && currentValues[inputName].length === 0) return;
+        if (inputValue === currentValues[inputName]) return;
 
-      //   const nextState: Object = {
-      //     values: {...this.state.values, ...Object.defineProperty({...this.state.values}, inputName, {value: inputValue})},
-      //     errors: {...this.state.errors, ...Object.defineProperty({...this.state.errors}, inputName, {value: Validate(inputName, inputValue)})}
-      //   };
+        const validateResult = Validate({[inputName]: inputValue});
 
-      //   // Плохой метод, но в качестве упрощения
-      //   if (JSON.stringify({...this.state}) !== JSON.stringify({...nextState}) ) {
-      //     this.setState(nextState);
-      //   }
-      // }
+        const nextState: Object = {
+          values: {...this.state.values, ...Object.defineProperty({...this.state.values}, inputName, {value: inputValue})},
+          errors: {...this.state.errors, ...Object.defineProperty({...this.state.errors}, inputName, {value: validateResult[inputName]})}
+        };
+
+        if (diffObjectsDeep.compareValues(this.state, nextState)) {
+          this.setState(nextState);
+        }
+      }
     }
   }
 

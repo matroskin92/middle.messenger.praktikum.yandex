@@ -1,4 +1,4 @@
-import { Router } from '../../core';
+// import { Router } from '../../core';
 import Block from '../../core/Block';
 
 interface LinkProps {
@@ -14,8 +14,9 @@ export class Link extends Block {
     const onClick = (event: MouseEvent) => {
       event.preventDefault();
 
-      const router = new Router();
-      router.go(this.props.href);
+      window.store.dispatch({
+        'screen': this.props.href
+      });
     };
 
     super({text, color, size, href, events: {click: onClick}});

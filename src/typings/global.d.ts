@@ -15,8 +15,8 @@ declare global {
     login: string;
     firstName: string;
     secondName: string;
-    displayName: string;
-    avatar: string;
+    displayName: string | null;
+    avatar: string | null;
     phone: string;
     email: string;
   };
@@ -25,6 +25,7 @@ declare global {
     screen: Screens | null;
     isLoading: boolean;
     user: User | null;
+    appIsInited: boolean;
   }
 
   interface Window {

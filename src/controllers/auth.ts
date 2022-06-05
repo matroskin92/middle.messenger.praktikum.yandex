@@ -1,10 +1,9 @@
 import AuthAPI from '../api/auth';
 import { LoginData, SignUpData } from '../api/types';
-import store from '../core/Store';
-import Router from '../core/Router';
+import { transformUser, apiHasError } from '../utils';
+import { UserDTO } from '../api/types';
 
 class AuthController {
-  private router!: Router;
   private static instanse: AuthController;
 
   constructor() {
@@ -12,29 +11,28 @@ class AuthController {
       return AuthController.instanse;
     }
 
-    this.router = new Router();
     AuthController.instanse = this;
+  }
+
+  public async getUser() {
+    try {
+      const response = await AuthAPI.getUser();
+      if (response.status === 200) {
+        const resParsed = JSON.parse(response.response);
+        if (apiHasError(resParsed)) return;
+        return transformUser(resParsed as UserDTO);
+      }
+    } catch (e) {
+      console.log('catch', e);
+    }
   }
 
   public async login(data: LoginData) {
     try {
       const response = await AuthAPI.login(data);
       if (response.status === 200) {
-        await this.getUser();
-
-        this.router.go('/messenger');
-      }
-    } catch (e) {
-      console.log(e);
-    }
-  }
-
-  public async getUser() {
-    try {
-      const response = await AuthAPI.getUser();
-
-      if (response.status === 200) {
-        store.set({'user': JSON.parse(response.response)});
+        const user = await this.getUser();
+        window.store.set({user, screen: '/messenger'});
       }
     } catch (e) {
       console.log(e);
@@ -46,7 +44,8 @@ class AuthController {
       const response = await AuthAPI.signUp(data);
 
       if (response.status === 200) {
-        this.router.go('/messenger');
+        const user = await this.getUser();
+        window.store.set({user, screen: '/messenger'});
       }
     } catch (e) {
       console.log(e);
@@ -57,8 +56,7 @@ class AuthController {
     try {
       const response = await AuthAPI.logout();
       if (response.status === 200) {
-        store.set({'user': null});
-        this.router.go('/');
+        window.store.set({'user': null, 'screen': '/'});
       }
     } catch (e) {
       console.log(e);

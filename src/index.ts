@@ -1,5 +1,6 @@
-import { renderDOM, registerComponent, Router, Store }  from './core';
-import { diffObjectsDeep, getScreenComponent, Screens }  from './utils';
+import { registerComponent, Router, Store }  from './core';
+import { initRouter } from './router';
+import { initApp } from './utils';
 
 import './styles/style.scss';
 
@@ -55,6 +56,7 @@ const defaultState: AppState = {
   isLoading: false,
   screen: null,
   user: null,
+  appIsInited: false
 };
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -65,30 +67,6 @@ document.addEventListener('DOMContentLoaded', () => {
   window.router = router;
   window.store = store;
 
-  store.on('changed', (prevState: AppState, nextState: AppState) => {
-    if (process.env.DEBUG) {
-      console.log(
-        '%cstore updated',
-        'background: #222; color: #bada55',
-        nextState,
-      );
-      console.log(JSON.stringify(diffObjectsDeep.map(prevState, nextState)));
-    }
-
-    if (prevState.screen !== nextState.screen) {
-      const Page = getScreenComponent(nextState.screen);
-      renderDOM('#app', new Page());
-    }
-  });
-
-  router
-    .use(Screens.Login, getScreenComponent(Screens.Login))
-    .use(Screens.Signup, getScreenComponent(Screens.Signup))
-    .use(Screens.Chat, getScreenComponent(Screens.Chat))
-    .use(Screens.Profile, getScreenComponent(Screens.Profile))
-    .use(Screens.ProfileEdit, getScreenComponent(Screens.ProfileEdit))
-    .use(Screens.ProfilePassword, getScreenComponent(Screens.ProfilePassword))
-    .use(Screens.NotFound, getScreenComponent(Screens.NotFound))
-    .use(Screens.ServerError, getScreenComponent(Screens.ServerError))
-    .start()
+  initRouter(router, store);
+  store.dispatch(initApp);
 });

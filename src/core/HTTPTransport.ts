@@ -14,11 +14,12 @@ type Options = {
     timeout?: number,
     data?: Record<string, any> | {} | null
 }
+
 export default class HTTPTransport {
-    path: string
+    path: string;
 
     constructor(route: string) {
-        this.path = route
+        this.path = route;
     }
 
     get = (url: string, options: Options = {}) => {

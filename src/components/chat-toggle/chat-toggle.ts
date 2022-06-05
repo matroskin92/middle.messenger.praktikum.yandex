@@ -1,14 +1,11 @@
 import Block from '../../core/Block';
-import { Router } from '../../core';
-
 export class ChatToggle extends Block {
   constructor() {
 
     const onClick = (e: MouseEvent) => {
       e.preventDefault();
 
-      const router = new Router();
-      router.go('/chat');
+      window.store.dispatch({'screen': '/messenger'});
     }
 
     super({events: { click: onClick }});
