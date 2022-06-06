@@ -1,6 +1,7 @@
 import Block from '../../core/Block';
+import storeConnect from '../../hoc/store-connect';
 
-export class ProfileEdit extends Block {
+class ProfileEdit extends Block {
 
   async componentDidMount() {
     this.setState({
@@ -73,3 +74,9 @@ export class ProfileEdit extends Block {
     `;
   }
 }
+
+const withStore = storeConnect((state) => ({
+  user: state.user
+}));
+
+export default withStore(ProfileEdit);

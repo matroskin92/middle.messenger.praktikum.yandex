@@ -10,6 +10,12 @@ declare global {
     [key: string]: string | undefined
   }
 
+  type Indexed<T = any> =
+    | {
+        [key in string]: T
+      }
+    | T;
+
   type User = {
     id: number;
     login: string;

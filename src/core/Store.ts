@@ -11,6 +11,10 @@ export type Action<State> = (
   payload: any,
 ) => void;
 
+export enum StoreEvents {
+  Updated = 'updated'
+}
+
 export default class Store<State extends Record<string, any>> extends EventBus {
   private state: State = {} as State;
 
