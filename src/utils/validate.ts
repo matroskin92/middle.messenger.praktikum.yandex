@@ -34,7 +34,7 @@ function test(name: string, value: string): string {
     }
   }
 
-  if (name === 'password' || name === 'password2') {
+  if (name === 'password' || name === 'password2' || name === 'oldPassword' || name === 'newPassword') {
     if (value.length < 8 || value.length > 40) {
       return 'Пароль должен быть больше 8 и меньше 40 символов';
     } else if (value.search(/[A-Z]/) === -1 || value.search(/[0-9]/) === -1) {
@@ -78,10 +78,10 @@ export function Validate(data: TStringObject): TStringObject {
 }
 
 export function isValid(data: TStringObject): boolean {
-  let isError: number | boolean = true;
+  let hasError: boolean = false;
   for (let key in data) {
-    isError = data[key].length ?? false;
+    hasError = (Boolean(data[key]?.length) || hasError) ?? false;
   }
 
-  return isError;
+  return !hasError;
 }

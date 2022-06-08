@@ -1,22 +1,52 @@
 import Block from '../../core/Block';
+import ProfileController from '../../controllers/profile';
+import imagePlaceholder from '../../img/contact/contact-1.png';
 
-import imageContact1 from '../../img/contact/contact-1.png';
 export class ProfileAvatar extends Block {
 
-  constructor() {
-    super({
-      imageContact1
-    });
+  protected getStateFromProps() {
+
+    const user = window.store.getState().user;
+
+    this.state = {
+      user: null,
+      values: {
+        displayName: user.displayName ?? '',
+        avatar: user.avatar ?? imagePlaceholder
+      },
+      errors: false,
+      fileHandler: async (event: MouseEvent) => {
+        event?.preventDefault();
+
+        console.log('onSubmit');
+
+        const { files }: { files: FileList | null } = event.target as HTMLInputElement;
+        if (!files?.length) return;
+
+        const avatarFromData = new FormData();
+        avatarFromData.append('avatar', files[0]);
+
+        await ProfileController.changeAvatar(avatarFromData);
+      },
+    }
   }
 
+
   protected render(): string {
+    const { values } = this.state;
     return `
-      <a class="profile-avatar" href="/settings-edit">
+      <div class="profile-avatar">
         <div class="profile-avatar__image">
-          <img src="{{imageContact1}}" width="130" height="130" alt="alt">
+          <img src="${process.env.RESOURCES}${values.avatar}" width="130" height="130" alt="alt">
+          {{{Input
+            name="avatar"
+            type="file"
+            ref="avatar"
+            onChange=fileHandler
+          }}}
         </div>
-        <span class="profile-avatar__username">Иван</span>
-      </a>
+        <span class="profile-avatar__username">${values.displayName}</span>
+      </div>
     `;
   }
 }

@@ -38,5 +38,15 @@ declare global {
     store: Store<AppState>;
     router: Router;
   }
+
+  interface HTMLInputElement {
+    value: string,
+    name: string
+  }
+
+  interface MouseEvent {
+    preventDefault(): void,
+    currentTarget: HTMLInputElement
+  }
 }
 

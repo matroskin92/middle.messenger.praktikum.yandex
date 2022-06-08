@@ -79,11 +79,10 @@ export default class HTTPTransport {
             xhr.timeout = timeout;
             xhr.ontimeout = reject;
 
-            if (isGet || !data) {
-                xhr.send();
+            if (isGet) {
+                xhr.send()
             } else {
-                const blob = new Blob([JSON.stringify(data, null, 2)], { type: 'application/json' });
-                xhr.send(blob);
+                xhr.send(data as any)
             }
         });
     };

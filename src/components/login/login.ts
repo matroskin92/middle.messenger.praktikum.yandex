@@ -47,7 +47,7 @@ export class Login extends Block {
 
         this.setState(nextState);
 
-        if (!isValid(ValidationResult)) {
+        if (isValid(ValidationResult)) {
           await AuthController.login(loginData);
         }
 

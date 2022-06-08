@@ -1,5 +1,3 @@
-import { blob } from "stream/consumers";
-
 export interface APIError {
   reason: string
 }
@@ -29,16 +27,12 @@ export interface SignUpData {
   phone: string
 }
 
-export interface UserSearch {
-  login: string
-}
-
-export interface UserPassword {
+export interface PasswordData {
   oldPassword: string,
   newPassword: string
 }
 
-export interface UserProfile {
+export interface ProfileData {
   first_name: string,
   second_name: string,
   display_name: string,
@@ -47,8 +41,8 @@ export interface UserProfile {
   phone: string
 }
 
-export interface UserAvatar {
-  data: typeof blob,
+export interface UserSearch {
+  login: string
 }
 
 export interface ChatAdd {

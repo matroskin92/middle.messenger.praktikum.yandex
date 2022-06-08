@@ -3,16 +3,6 @@ import {Validate, isValid} from '../../utils/validate';
 import diffObjectsDeep from '../../utils/diffObjectsDeep';
 import AuthController from '../../controllers/auth';
 
-interface HTMLInputElement {
-  value: string,
-  name: string
-}
-
-interface MouseEvent {
-  preventDefault(): void,
-  currentTarget: HTMLInputElement
-}
-
 export class SingUp extends Block {
 
   protected getStateFromProps() {
@@ -51,7 +41,7 @@ export class SingUp extends Block {
 
         this.setState(nextState);
 
-        if (!isValid(ValidationResult)) {
+        if (isValid(ValidationResult)) {
           await AuthController.signUp(SingUpData);
         }
 
