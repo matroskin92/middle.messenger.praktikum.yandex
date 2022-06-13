@@ -58,9 +58,9 @@ function test(name: string, value: string): string {
     }
   }
 
-  if (name === 'message') {
+  if (name === 'message' || name === 'chat_add') {
     if (value.length === 0) {
-      return 'Сообщение не должно быть пустым';
+      return 'Не должно быть пустым';
     }
   }
 

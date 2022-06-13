@@ -27,8 +27,18 @@ declare global {
     email: string;
   };
 
+  type TooltipItem = {
+    id: number;
+    value: string;
+  }
+
   interface AppState {
     screen: Screens | null;
+    search: string;
+    currentChat: {
+      id: string,
+      title: string
+    } | null;
     isLoading: boolean;
     user: User | null;
     appIsInited: boolean;

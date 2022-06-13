@@ -12,3 +12,10 @@ export const transformUser = (data: UserDTO): User => {
     email: data.email,
   };
 };
+
+export const transformSearchUser = (data: UserDTO): TooltipItem => {
+  return {
+    id: data.id,
+    value: data.login
+  };
+};

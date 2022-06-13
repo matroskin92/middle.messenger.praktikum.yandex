@@ -1,29 +1,58 @@
 import Block from '../../core/Block';
+import storeConnect from '../../hoc/store-connect';
+import ChatController from '../../controllers/chat';
 
-import imageContact1 from '../../img/contact/contact-1.png';
-import imageContact2 from '../../img/contact/contact-2.png';
-import imageContact3 from '../../img/contact/contact-3.png';
-export class ContactList extends Block {
+class ContactList extends Block {
 
-  constructor() {
-    super({
-      imageContact1,
-      imageContact2,
-      imageContact3,
+  async componentDidMount() {
+    const search = window.store.getState().search;
+    const contacts = await ChatController.getChatsList(search);
+
+    const contactsWithHandler = contacts.map((contact) => {
+      const onClick = (event: MouseEvent) => {
+        event.preventDefault();
+        this.state.contactHandler(contact.id, contact.title);
+      };
+
+      return {...contact, onClick};
     });
+
+    this.setState({contacts: contactsWithHandler});
+  }
+
+  protected getStateFromProps() {
+    this.state = {
+      contacts: [],
+      contactHandler: (id: number, title: string) => {
+        if (id && title) {
+          window.store.dispatch({currentChat: {id, title}});
+        }
+      }
+    }
   }
 
   protected render(): string {
     return `
       <div class="chat-contacts">
         <div class="chat-contacts__item">
-          {{{ContactItem name="Андрей" image=imageContact3 text="Изображение" date="12:00"}}}
-          {{{ContactItem name="Василий Петрович" image=imageContact2 text="Друзья, у меня для вас особенный выпуск новостей!..." date="08:12" unread="48"}}}
-          {{{ContactItem name="Киноклуб SUPERHD" image=imageContact1 text="Премьера нового фильма с Петькой в главной роли" date="Вчера" unread="2"}}}
-          {{{ContactItem name="Петька" image=imageContact3 text="Привет, почему не отвечаешь?" date="06:12" unread="12"}}}
-          {{{ContactItem name="Maxim Borisovich" image=imageContact2 text="Петя получил приглашение в чат" date="12 апреля"}}}
+          {{#each contacts}}
+            {{{ContactItem
+              id=this.id
+              ref=this.ref
+              name=this.title
+              image=this.avatar
+              text=this.last_message.content
+              unread=this.unread_count
+              date=this.active
+              onClick=this.onClick
+            }}}
+          {{/each}}
         </div>
       </div>
     `;
   }
 }
+
+const withStore = storeConnect(() => ({}));
+
+export default withStore(ContactList);

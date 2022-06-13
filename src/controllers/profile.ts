@@ -1,6 +1,6 @@
 import ProfileAPI from '../api/profile';
 import { ProfileData, PasswordData } from '../api/types';
-import { transformUser, apiHasError } from '../utils';
+import { transformUser, transformSearchUser, apiHasError } from '../utils';
 import { UserDTO } from '../api/types';
 
 class ProfileController {
@@ -56,6 +56,20 @@ class ProfileController {
     }
   }
 
+  public async searchUsers(login: string) {
+    try {
+      const response = await ProfileAPI.searchUser({login});
+      if (response.status === 200) {
+        const resParsed = JSON.parse(response.response);
+        if (apiHasError(resParsed)) return;
+
+        return resParsed.slice(0, 5).map((user: any) => transformSearchUser(user as UserDTO));
+      }
+    } catch (e) {
+      console.log('catch', e);
+    }
+  }
+  
 }
 
 export default new ProfileController();

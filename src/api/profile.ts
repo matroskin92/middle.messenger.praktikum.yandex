@@ -1,5 +1,5 @@
 import HTTPTransport from '../core/HTTPTransport';
-import {ProfileData, PasswordData} from './types';
+import {ProfileData, PasswordData, SearchUserData} from './types';
 
 class ProfileAPI {
   private _request: HTTPTransport;
@@ -13,7 +13,7 @@ class ProfileAPI {
       headers: {
         'Content-Type': 'application/json'
       },
-      data,
+      data: JSON.stringify(data)
     });
   }
 
@@ -22,13 +22,22 @@ class ProfileAPI {
       headers: {
         'Content-Type': 'application/json'
       },
-      data,
+      data: JSON.stringify(data)
     });
   }
 
   changeAvatar(data: FormData) {
     return this._request.put('profile/avatar', {
       data,
+    });
+  }
+
+  searchUser(data: SearchUserData) {
+    return this._request.post('search', {
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      data: JSON.stringify(data)
     });
   }
 

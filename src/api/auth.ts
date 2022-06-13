@@ -13,7 +13,7 @@ class AuthAPI {
       headers: {
         'Content-Type': 'application/json'
       },
-      data,
+      data: JSON.stringify(data)
     })
   }
 
@@ -39,7 +39,7 @@ class AuthAPI {
       headers: {
         'Content-Type': 'application/json'
       },
-      data,
+      data: JSON.stringify(data)
     })
   }
 }

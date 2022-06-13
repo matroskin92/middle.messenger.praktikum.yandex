@@ -32,7 +32,7 @@ class AuthController {
       const response = await AuthAPI.login(data);
       if (response.status === 200) {
         const user = await this.getUser();
-        window.store.set({user, screen: '/messenger'});
+        window.store.dispatch({user, screen: '/messenger'});
       }
     } catch (e) {
       console.log(e);
@@ -45,7 +45,7 @@ class AuthController {
 
       if (response.status === 200) {
         const user = await this.getUser();
-        window.store.set({user, screen: '/messenger'});
+        window.store.dispatch({user, screen: '/messenger'});
       }
     } catch (e) {
       console.log(e);
@@ -56,7 +56,7 @@ class AuthController {
     try {
       const response = await AuthAPI.logout();
       if (response.status === 200) {
-        window.store.set({'user': null, 'screen': '/'});
+        window.store.dispatch({'user': null, 'screen': '/'});
       }
     } catch (e) {
       console.log(e);

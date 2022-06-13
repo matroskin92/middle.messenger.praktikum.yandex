@@ -32,6 +32,10 @@ export interface PasswordData {
   newPassword: string
 }
 
+export interface SearchUserData {
+  login: string
+}
+
 export interface ProfileData {
   first_name: string,
   second_name: string,
@@ -41,19 +45,19 @@ export interface ProfileData {
   phone: string
 }
 
-export interface UserSearch {
-  login: string
+export interface ChatListData {
+  title: string | undefined
 }
 
-export interface ChatAdd {
+export interface AddChatData {
   title: string
 }
 
-export interface ChatUsers {
+export interface UsersData {
   users: number[]
-  chatId: number
+  chatId: number | string
 }
 
-export interface ChatRemove {
+export interface RemoveChatData {
   chatId: number | string
 }
