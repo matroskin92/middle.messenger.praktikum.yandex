@@ -13,7 +13,7 @@ interface ContactItemProps {
 
 export class ContactItem extends Block {
 
-  constructor({...props, onClick}: ContactItemProps) {
+  constructor({onClick, ...props}: ContactItemProps) {
     super({...props, events: {click: onClick}});
   }
 

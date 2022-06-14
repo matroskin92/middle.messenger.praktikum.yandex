@@ -14,102 +14,74 @@ class ChatController {
   }
 
   public async getToken(chatId: number | string) {
-    try {
-      const response = await ChatAPI.getToken(chatId);
-      if (response.status === 200) {
-        const resParsed = JSON.parse(response.response);
-        if (apiHasError(resParsed)) return;
+    const response = await ChatAPI.getToken(chatId);
+    if (response.status === 200) {
+      const resParsed = JSON.parse(response.response);
+      if (apiHasError(resParsed)) return;
 
-        return resParsed.token;
-      }
-    } catch (e) {
-      console.log('catch', e);
+      return resParsed.token;
     }
   }
 
   public async getChatsList(search: string | null = null) {
-    try {
-      const response = await ChatAPI.getChatsList({ title: search ?? '' });
-      if (response.status === 200) {
-        const resParsed = JSON.parse(response.response);
-        if (apiHasError(resParsed)) return;
+    const response = await ChatAPI.getChatsList({ title: search ?? '' });
+    if (response.status === 200) {
+      const resParsed = JSON.parse(response.response);
+      if (apiHasError(resParsed)) return;
 
-        return resParsed;
-      }
-    } catch (e) {
-      console.log('catch', e);
+      return resParsed;
     }
   }
 
   public async getChatUsers(id: string) {
-    try {
-      const response = await ChatAPI.getChatUsers(id);
-      if (response.status === 200) {
-        const resParsed = JSON.parse(response.response);
-        if (apiHasError(resParsed)) return;
+    const response = await ChatAPI.getChatUsers(id);
+    if (response.status === 200) {
+      const resParsed = JSON.parse(response.response);
+      if (apiHasError(resParsed)) return;
 
-        return resParsed.map((user: any) => transformUser(user as UserDTO));
-      }
-    } catch (e) {
-      console.log('catch', e);
+      return resParsed.map((user: any) => transformUser(user as UserDTO));
     }
   }
 
   public async addChat(title: string) {
-    try {
-      const response = await ChatAPI.addChat({ title });
-      if (response.status === 200) {
-        const resParsed = JSON.parse(response.response);
-        if (apiHasError(resParsed)) return;
+    const response = await ChatAPI.addChat({ title });
+    if (response.status === 200) {
+      const resParsed = JSON.parse(response.response);
+      if (apiHasError(resParsed)) return;
 
-        window.store.dispatch({});
+      window.store.dispatch({});
 
-        return resParsed;
-      }
-    } catch (e) {
-      console.log('catch', e);
+      return resParsed;
     }
   }
 
   public async addUser(chatId: number | string, userId: number) {
-    try {
-      const response = await ChatAPI.addUsers({
-        chatId,
-        users: [userId]
-      });
+    const response = await ChatAPI.addUsers({
+      chatId,
+      users: [userId]
+    });
 
-      if (response.status === 200) {
-        window.store.dispatch({});
-      }
-    } catch (e) {
-      console.log('catch', e);
+    if (response.status === 200) {
+      window.store.dispatch({});
     }
   }
 
   public async removeUser(chatId: number | string, userId: number) {
-    try {
-      const response = await ChatAPI.removeUsers({
-        chatId,
-        users: [userId]
-      });
+    const response = await ChatAPI.removeUsers({
+      chatId,
+      users: [userId]
+    });
 
-      if (response.status === 200) {
-        window.store.dispatch({});
-      }
-    } catch (e) {
-      console.log('catch', e);
+    if (response.status === 200) {
+      window.store.dispatch({});
     }
   }
 
   public async removeChat(chatId: number | string) {
-    try {
-      const response = await ChatAPI.removeChat({chatId});
+    const response = await ChatAPI.removeChat({chatId});
 
-      if (response.status === 200) {
-        window.store.dispatch({currentChat: null});
-      }
-    } catch (e) {
-      console.log('catch', e);
+    if (response.status === 200) {
+      window.store.dispatch({currentChat: null});
     }
   }
 

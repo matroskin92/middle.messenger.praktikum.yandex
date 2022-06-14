@@ -1,5 +1,3 @@
-import diffObjectsDeep from '../utils/diffObjectsDeep';
-
 type Options = {
   chatId: string | number;
   userId: string | number;
@@ -35,9 +33,9 @@ class MessageController {
     this._removeEvents();
 
     if (event.wasClean) {
-      console.log('Соединение закрыто чисто');
+      console.info('Соединение закрыто чисто');
     } else {
-      console.log('Обрыв соединения');
+      console.error('Обрыв соединения');
     }
 
     if (event.code === 1006) {
@@ -68,7 +66,6 @@ class MessageController {
 
   private _message(event: MessageEvent) {
     const data = JSON.parse(event.data);
-    console.log(data);
 
     if (Array.isArray(data)) {
       const newMessages = data.map((msg) => {
@@ -90,7 +87,7 @@ class MessageController {
   }
 
   private _error(event: ErrorEventInit) {
-    console.log('Ошибка', event.message);
+    console.error('Ошибка', event.message);
   }
 
   private _addEvents() {

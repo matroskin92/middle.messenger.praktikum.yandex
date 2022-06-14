@@ -15,52 +15,52 @@ class AuthController {
   }
 
   public async getUser() {
-    try {
+    // try {
       const response = await AuthAPI.getUser();
       if (response.status === 200) {
         const resParsed = JSON.parse(response.response);
         if (apiHasError(resParsed)) return;
         return transformUser(resParsed as UserDTO);
       }
-    } catch (e) {
-      console.log('catch', e);
-    }
+    // } catch (e) {
+    //   console.log('catch', e);
+    // }
   }
 
   public async login(data: LoginData) {
-    try {
+    // try {
       const response = await AuthAPI.login(data);
       if (response.status === 200) {
         const user = await this.getUser();
         window.store.dispatch({user, screen: '/messenger'});
       }
-    } catch (e) {
-      console.log(e);
-    }
+    // } catch (e) {
+    //   console.log(e);
+    // }
   }
 
   public async signUp(data: SignUpData) {
-    try {
+    // try {
       const response = await AuthAPI.signUp(data);
 
       if (response.status === 200) {
         const user = await this.getUser();
         window.store.dispatch({user, screen: '/messenger'});
       }
-    } catch (e) {
-      console.log(e);
-    }
+    // } catch (e) {
+    //   console.log(e);
+    // }
   }
 
   public async logout() {
-    try {
+    // try {
       const response = await AuthAPI.logout();
       if (response.status === 200) {
         window.store.dispatch({'user': null, 'screen': '/'});
       }
-    } catch (e) {
-      console.log(e);
-    }
+    // } catch (e) {
+    //   console.log(e);
+    // }
   }
 
 }

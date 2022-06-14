@@ -10,19 +10,13 @@ class ProfileAPI {
 
   changeProfile(data: ProfileData) {
     return this._request.put('profile', {
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      data: JSON.stringify(data)
+      data
     });
   }
 
   changePassword(data: PasswordData) {
     return this._request.put('password', {
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      data: JSON.stringify(data)
+      data
     });
   }
 
@@ -34,10 +28,7 @@ class ProfileAPI {
 
   searchUser(data: SearchUserData) {
     return this._request.post('search', {
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      data: JSON.stringify(data)
+      data
     });
   }
 

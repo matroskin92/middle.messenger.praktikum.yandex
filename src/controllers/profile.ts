@@ -15,61 +15,44 @@ class ProfileController {
   }
 
   public async changeProfile(data: ProfileData) {
-    try {
-      const response = await ProfileAPI.changeProfile(data);
-      if (response.status === 200) {
-        const resParsed = JSON.parse(response.response);
-        if (apiHasError(resParsed)) return;
+    const response = await ProfileAPI.changeProfile(data);
+    if (response.status === 200) {
+      const resParsed = JSON.parse(response.response);
+      if (apiHasError(resParsed)) return;
 
-        window.store.dispatch({user: transformUser(resParsed as UserDTO), screen: '/settings'});
-      }
-    } catch (e) {
-      console.log('catch', e);
+      window.store.dispatch({user: transformUser(resParsed as UserDTO), screen: '/settings'});
     }
   }
 
   public async changePassword(data: PasswordData) {
-    try {
-      const response = await ProfileAPI.changePassword(data);
-      if (response.status === 200 && response.response === 'OK') {
-        window.store.dispatch({screen: '/settings'});
-      } else if (response.status === 200) {
-        const resParsed = JSON.parse(response.response);
-        if (apiHasError(resParsed)) return;
-      }
-    } catch (e) {
-      console.log('catch', e);
+    const response = await ProfileAPI.changePassword(data);
+    if (response.status === 200 && response.response === 'OK') {
+      window.store.dispatch({screen: '/settings'});
+    } else if (response.status === 200) {
+      const resParsed = JSON.parse(response.response);
+      if (apiHasError(resParsed)) return;
     }
   }
 
   public async changeAvatar(data: FormData) {
-    try {
-      const response = await ProfileAPI.changeAvatar(data);
-      if (response.status === 200) {
-        const resParsed = JSON.parse(response.response);
-        if (apiHasError(resParsed)) return;
+    const response = await ProfileAPI.changeAvatar(data);
+    if (response.status === 200) {
+      const resParsed = JSON.parse(response.response);
+      if (apiHasError(resParsed)) return;
 
-        window.store.dispatch({user: transformUser(resParsed as UserDTO), screen: '/settings'});
-      }
-    } catch (e) {
-      console.log('catch', e);
+      window.store.dispatch({user: transformUser(resParsed as UserDTO), screen: '/settings'});
     }
   }
 
   public async searchUsers(login: string) {
-    try {
-      const response = await ProfileAPI.searchUser({login});
-      if (response.status === 200) {
-        const resParsed = JSON.parse(response.response);
-        if (apiHasError(resParsed)) return;
+    const response = await ProfileAPI.searchUser({login});
+    if (response.status === 200) {
+      const resParsed = JSON.parse(response.response);
+      if (apiHasError(resParsed)) return;
 
-        return resParsed.slice(0, 5).map((user: any) => transformSearchUser(user as UserDTO));
-      }
-    } catch (e) {
-      console.log('catch', e);
+      return resParsed.slice(0, 5).map((user: any) => transformSearchUser(user as UserDTO));
     }
   }
-  
 }
 
 export default new ProfileController();

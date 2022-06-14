@@ -9,63 +9,40 @@ class ChatAPI {
   }
 
   getToken(id: string | number) {
-    return this._request.post(`token/${id}`, {
-      headers: {
-        'Content-Type': 'application/json'
-      },
-    });
+    return this._request.post(`token/${id}`);
   }
 
   addChat(data: AddChatData) {
     return this._request.post('', {
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      data: JSON.stringify(data),
+      data
     });
   }
 
   removeChat(data: RemoveChatData) {
     return this._request.delete('', {
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      data: JSON.stringify(data),
+      data
     });
   }
 
   getChatsList(data: ChatListData) {
     return this._request.get('', {
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      data,
+      data
     });
   }
 
   getChatUsers(id: string | number) {
-    return this._request.get(`${id}/users`, {
-      headers: {
-        'Content-Type': 'application/json'
-      },
-    });
+    return this._request.get(`${id}/users`);
   }
 
   addUsers(data: UsersData) {
     return this._request.put('users', {
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      data: JSON.stringify(data),
+      data
     });
   }
 
   removeUsers(data: UsersData) {
     return this._request.delete('users', {
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      data: JSON.stringify(data),
+      data
     });
   }
 

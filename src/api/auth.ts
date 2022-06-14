@@ -10,37 +10,26 @@ class AuthAPI {
 
   login(data: LoginData) {
     return this._request.post('signin', {
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      data: JSON.stringify(data)
-    })
+      data
+    });
   }
 
   logout() {
-    return this._request.post('logout', {
-      headers: {
-        'Content-Type': 'application/json'
-      },
-    })
+    return this._request.post('logout');
   }
 
   getUser() {
     return this._request.get('user', {
       headers: {
-        'Content-Type': 'application/json',
         'Accept': 'application/json',
       },
-    })
+    });
   }
 
   signUp(data: SignUpData) {
     return this._request.post('signup', {
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      data: JSON.stringify(data)
-    })
+      data
+    });
   }
 }
 
