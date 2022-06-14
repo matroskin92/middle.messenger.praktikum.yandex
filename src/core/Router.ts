@@ -6,7 +6,7 @@ export default class Router {
   private static __instance: Router;
   private _currentRoute: Nullable<Route>;
   protected routes: Route[] = [];
-  protected history = window.history;
+  protected _history = window.history;
   private readonly _rootQuery: string | undefined;
 
   constructor(rootQuery: string = '#app') {
@@ -15,11 +15,19 @@ export default class Router {
     }
 
     this.routes = [];
-    this.history = window.history;
+    this._history = window.history;
     this._currentRoute = null;
     this._rootQuery = rootQuery;
 
     Router.__instance = this;
+  }
+
+  get history() {
+    return this._history;
+  }
+
+  get currentRoute() {
+    return this._currentRoute;
   }
 
   use(pathname: string, block: typeof Block) {
@@ -48,20 +56,21 @@ export default class Router {
   }
 
   go(pathname: string) {
-    this.history.pushState({}, "", pathname);
+    this._history.pushState({}, "", pathname);
     this._onRoute(pathname);
   }
 
   back() {
-    this.history.back();
+    this._history.back();
   }
 
   forward() {
-    this.history.forward();
+    this._history.forward();
   }
 
   getRoute(pathname: string) {
     const route = this.routes.find(route => route.match(pathname));
     return route || this.routes.find(route => route.match('/404'));
   }
+
 }
