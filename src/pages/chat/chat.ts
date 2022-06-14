@@ -2,17 +2,11 @@ import Block from '../../core/Block';
 
 export class ChatPage extends Block {
 
-  async componentDidMount() {
-    const currentChat = window.store.getState().currentChat;
-    if (currentChat) {
-      this.setState({...currentChat});
-    }
-  }
-
   protected getStateFromProps() {
+    const currentChat = window.store.getState().currentChat;
+
     this.state = {
-      id: null,
-      title: null
+      id: currentChat?.id ?? null
     }
   }
 

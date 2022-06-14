@@ -75,13 +75,5 @@ export function initRouter(router: Router, store: Store<AppState>) {
       router.go(nextState.screen);
     }
 
-    if (process.env.DEBUG) {
-      console.log(
-        '%cstore updated',
-        'background: #222; color: #bada55',
-        nextState,
-      );
-      console.log(JSON.stringify(diffObjectsDeep.map(prevState, nextState)));
-    }
   });
 }

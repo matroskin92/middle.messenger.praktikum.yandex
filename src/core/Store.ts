@@ -35,6 +35,12 @@ export default class Store<State extends Record<string, any>> extends EventBus {
     this.state = { ...this.state, ...nextState };
 
     this.emit('changed', prevState, nextState);
+    
+    // console.log(
+    //   '%cstore updated',
+    //   'background: #222; color: #bada55',
+    //   nextState,
+    // );
   }
 
   dispatch(nextStateOrAction: Partial<State> | Action<State>, payload?: any) {

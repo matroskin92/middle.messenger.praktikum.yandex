@@ -7,18 +7,16 @@ export class ChatTopbar extends Block {
   async componentDidMount() {
     const currentChat = window.store.getState().currentChat;
     if (currentChat) {
-      const users = await ChatController.getChatUsers(currentChat.id);
-      if (users) {
-        const userWithHandler = users.map((user: User) => {
-          const onClick = (event: MouseEvent) => {
-            event.preventDefault();
-            this.state.removeUserHandler(currentChat.id, user.id);
-          }
 
-          return {...user, onClick};
-        });
-        this.setState({...currentChat, users: userWithHandler});
-      }
+      const userWithHandler = currentChat.users.map((user: User) => {
+        const onClick = (event: MouseEvent) => {
+          event.preventDefault();
+          this.state.removeUserHandler(currentChat.id, user.id);
+        }
+
+        return {...user, onClick};
+      });
+      this.setState({...currentChat, users: userWithHandler});
     }
   }
 

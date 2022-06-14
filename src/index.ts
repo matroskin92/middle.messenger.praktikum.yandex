@@ -62,6 +62,7 @@ const defaultState: AppState = {
   search: '',
   screen: null,
   user: null,
+  messages: [],
   appIsInited: false
 };
 

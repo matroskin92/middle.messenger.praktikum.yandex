@@ -37,10 +37,12 @@ declare global {
     search: string;
     currentChat: {
       id: string,
-      title: string
+      title: string,
+      users: []
     } | null;
     isLoading: boolean;
     user: User | null;
+    messages: [];
     appIsInited: boolean;
   }
 

@@ -18,8 +18,6 @@ export class ProfileAvatar extends Block {
       fileHandler: async (event: MouseEvent) => {
         event?.preventDefault();
 
-        console.log('onSubmit');
-
         const { files }: { files: FileList | null } = event.target as HTMLInputElement;
         if (!files?.length) return;
 

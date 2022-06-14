@@ -1,17 +1,27 @@
 import Block from '../../core/Block';
-import storeConnect from '../../hoc/store-connect';
 import ChatController from '../../controllers/chat';
 
-class ContactList extends Block {
+export class ContactList extends Block {
 
   async componentDidMount() {
     const search = window.store.getState().search;
     const contacts = await ChatController.getChatsList(search);
 
     const contactsWithHandler = contacts.map((contact) => {
-      const onClick = (event: MouseEvent) => {
+
+      const onClick = async (event: MouseEvent) => {
         event.preventDefault();
-        this.state.contactHandler(contact.id, contact.title);
+
+        const users = await ChatController.getChatUsers(contact.id);
+
+        window.store.dispatch({
+          currentChat: {
+            id: contact.id,
+            title: contact.title,
+            users
+          },
+          messages: []
+        });
       };
 
       return {...contact, onClick};
@@ -22,12 +32,7 @@ class ContactList extends Block {
 
   protected getStateFromProps() {
     this.state = {
-      contacts: [],
-      contactHandler: (id: number, title: string) => {
-        if (id && title) {
-          window.store.dispatch({currentChat: {id, title}});
-        }
-      }
+      contacts: []
     }
   }
 
@@ -52,7 +57,3 @@ class ContactList extends Block {
     `;
   }
 }
-
-const withStore = storeConnect(() => ({}));
-
-export default withStore(ContactList);

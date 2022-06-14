@@ -13,6 +13,20 @@ class ChatController {
     ChatController.instanse = this;
   }
 
+  public async getToken(chatId: number | string) {
+    try {
+      const response = await ChatAPI.getToken(chatId);
+      if (response.status === 200) {
+        const resParsed = JSON.parse(response.response);
+        if (apiHasError(resParsed)) return;
+
+        return resParsed.token;
+      }
+    } catch (e) {
+      console.log('catch', e);
+    }
+  }
+
   public async getChatsList(search: string | null = null) {
     try {
       const response = await ChatAPI.getChatsList({ title: search ?? '' });
@@ -98,7 +112,6 @@ class ChatController {
       console.log('catch', e);
     }
   }
-
 
 }
 
