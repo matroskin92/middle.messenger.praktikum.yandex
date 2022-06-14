@@ -13,8 +13,8 @@ interface ContactItemProps {
 
 export class ContactItem extends Block {
 
-  constructor({id, image, name, text, date, unread, onClick}: ContactItemProps) {
-    super({id, image, name, text, date, unread, events: {click: onClick}});
+  constructor({...props, onClick}: ContactItemProps) {
+    super({...props, events: {click: onClick}});
   }
 
   protected render(): string {
