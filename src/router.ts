@@ -1,5 +1,5 @@
-import { Router, Store, renderDOM } from './core';
-import { diffObjectsDeep, getScreenComponent, Screens } from './utils';
+import { Router, Store } from './core';
+import { getScreenComponent, Screens } from './utils';
 
 const routes = [
   {
