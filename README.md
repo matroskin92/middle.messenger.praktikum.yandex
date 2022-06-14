@@ -3,9 +3,7 @@
 Чат для себя и своих друзей, вы можете его установить на своем хостинге и наслаждаться общением без предград!
 
 ## Pull Requests
-[Pull Request Sprint 1](https://github.com/matroskin92/middle.messenger.praktikum.yandex/pull/1)
-
-[Pull Request Sprint 2](https://github.com/matroskin92/middle.messenger.praktikum.yandex/pull/2)
+[Pull Request Sprint 3](https://github.com/matroskin92/middle.messenger.praktikum.yandex/pull/3)
 
 ## Установка
 
