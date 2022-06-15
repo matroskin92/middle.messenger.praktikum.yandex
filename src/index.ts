@@ -58,7 +58,7 @@ registerComponent(SingUp, 'SingUp');
 
 const defaultState: AppState = {
   isLoading: false,
-  currentChat: null,
+  currentChat: localStorage.getItem('current_chat') ? JSON.parse(localStorage.getItem('current_chat') ?? '') : null,
   search: '',
   screen: null,
   user: null,
@@ -76,4 +76,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
   initRouter(router, store);
   store.dispatch(initApp);
+
+  // Сохраняем критичные данные в storage
+  store.on('changed', (prevState, {currentChat}) => {
+    localStorage.setItem('current_chat', JSON.stringify(currentChat));
+  });
 });
