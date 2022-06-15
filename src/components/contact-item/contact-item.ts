@@ -1,5 +1,4 @@
 import Block from '../../core/Block';
-import imagePlaceholder from '../../img/contact/contact-1.png';
 
 interface ContactItemProps {
   id: string;
@@ -19,13 +18,14 @@ export class ContactItem extends Block {
 
   protected render(): string {
 
-    const { image } = this.props;
+    const { image, name } = this.props;
+    const placeholder = `https://via.placeholder.com/48/0000FF/FFFFFF?text=${name.slice(0, 1)}`;
 
     return `
       <div class="chat-contact">
         <div class="chat-contact__avatar">
           <div class="chat-avatar">
-            <img src="${image ? process.env.RESOURCES + image : imagePlaceholder}" width="48" height="48" alt="{{name}}">
+            <img src="${image ? process.env.RESOURCES + image : placeholder}" width="48" height="48" alt="{{name}}">
           </div>
         </div><span class="chat-contact__name">{{name}}</span>
         <div class="chat-contact__last">{{{text}}}</div>

@@ -1,13 +1,18 @@
 import Block from '../../core/Block';
 import ChatController from '../../controllers/chat';
 
+interface Contact {
+  id: string;
+  title: string;
+}
+
 export class ContactList extends Block {
 
   async componentDidMount() {
     const search = window.store.getState().search;
     const contacts = await ChatController.getChatsList(search);
 
-    const contactsWithHandler = contacts.map((contact) => {
+    const contactsWithHandler = contacts.map((contact: Contact) => {
 
       const onClick = async (event: MouseEvent) => {
         event.preventDefault();
