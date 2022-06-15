@@ -1,6 +1,4 @@
 import Block from '../../core/Block';
-import ChatController from '../../controllers/chat';
-
 
 export class ChatSearch extends Block {
 
