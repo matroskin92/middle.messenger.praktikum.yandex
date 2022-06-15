@@ -56,7 +56,7 @@ class MessageController {
       : {
         ...msg,
         self: false,
-        name: `${currentUser.first_name} ${currentUser.second_name}`,
+        name: currentUser?.login ?? 'anonymous',
       }
 
     const time = new Date(message.time);
