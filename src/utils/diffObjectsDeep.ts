@@ -23,20 +23,20 @@ const diffObjectsDeep = {
       };
     }
 
-    var diff: Indexed = {};
-    for (var key in obj1) {
+    let diff: Indexed = {};
+    for (let key in obj1) {
       if (this.isFunction(obj1[key])) {
         continue;
       }
 
-      var value2 = undefined;
+      let value2 = undefined;
       if (obj2 && obj2[key] !== undefined) {
         value2 = obj2[key];
       }
 
       diff[key] = this.map(obj1[key], value2);
     }
-    for (var key in obj2) {
+    for (let key in obj2) {
       if (this.isFunction(obj2[key]) || diff[key] !== undefined) {
         continue;
       }
