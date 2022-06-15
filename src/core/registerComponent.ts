@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import Block from './Block';
 import Handlebars, { HelperOptions } from 'handlebars';
 

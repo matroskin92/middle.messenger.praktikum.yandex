@@ -1,3 +1,8 @@
+/* eslint-disable no-param-reassign */
+/* eslint-disable @typescript-eslint/no-unused-vars */
+/* eslint-disable no-unused-vars */
+/* eslint-disable no-use-before-define */
+
 import EventBus from './EventBus';
 import {nanoid} from 'nanoid';
 import Handlebars from 'handlebars';
