@@ -13,7 +13,7 @@ interface MouseEvent {
   currentTarget: HTMLInputElement
 }
 
-interface LoginData {
+interface LoginData extends TStringObject {
   login: string,
   password: string
 }

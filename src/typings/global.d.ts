@@ -2,7 +2,7 @@ export {};
 
 declare global {
 
-  type Nullable<T> = T | null;
+  type Nullable<T> = T | null | undefined;
   type Keys<T extends Record<string, unknown>> = keyof T;
   type Values<T extends Record<string, unknown>> = T[Keys<T>];
 

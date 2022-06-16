@@ -6,6 +6,7 @@ interface BlockConstructable<Props = any> {
   new(props: Props): Block
 }
 
+// @ts-ignore
 export default function registerComponent<Props = any>(Component: BlockConstructable, name: string) {
   Handlebars.registerHelper(name, function ({ hash: { ref, ...hash }, data }: HelperOptions) {
 

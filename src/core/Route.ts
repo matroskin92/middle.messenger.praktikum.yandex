@@ -4,7 +4,7 @@ import { isEqual } from '../utils';
 
 export default class Route {
   private _props: TStringObject;
-  private _block: Block | null;
+  private _block: Nullable<Block>;
   private _blockClass: Block;
   private _pathname: string;
 
@@ -37,7 +37,7 @@ export default class Route {
   }
 
   render() {
-    this._block = new this._blockClass(this._props)
+    this._block = new this._blockClass(this._props);
     renderDOM(this._props.rootQuery, this._block);
   }
 }

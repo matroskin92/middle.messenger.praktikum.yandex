@@ -1,18 +1,18 @@
 import Block from '../../core/Block';
 import ProfileController from '../../controllers/profile';
-import imagePlaceholder from '../../img/contact/contact-1.png';
 
 export class ProfileAvatar extends Block {
 
   protected getStateFromProps() {
 
     const user = window.store.getState().user;
+    const placeholder = `https://via.placeholder.com/48/0000FF/FFFFFF?text=${user.login}`;
 
     this.state = {
       user: null,
       values: {
         displayName: user.displayName ?? '',
-        avatar: user.avatar ?? imagePlaceholder
+        avatar: `${process.env.RESOURCES}${user.avatar}` ?? placeholder
       },
       errors: false,
       fileHandler: async (event: MouseEvent) => {
@@ -32,10 +32,11 @@ export class ProfileAvatar extends Block {
 
   protected render(): string {
     const { values } = this.state;
+
     return `
       <div class="profile-avatar">
         <div class="profile-avatar__image">
-          <img src="${process.env.RESOURCES}${values.avatar}" width="130" height="130" alt="alt">
+          <img src="${values.avatar}" width="130" height="130" alt="alt">
           {{{Input
             name="avatar"
             type="file"
