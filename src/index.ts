@@ -76,9 +76,4 @@ document.addEventListener('DOMContentLoaded', () => {
 
   initRouter(router, store);
   store.dispatch(initApp);
-
-  // Сохраняем критичные данные в storage
-  store.on('changed', (prevState, {currentChat}) => {
-    localStorage.setItem('current_chat', JSON.stringify(currentChat));
-  });
 });

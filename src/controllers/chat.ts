@@ -1,6 +1,6 @@
 import ChatAPI from '../api/chat';
 import { UserDTO } from '../api/types';
-import { transformUser, apiHasError } from '../utils';
+import { transformUser } from '../utils';
 
 class ChatController {
   private static instanse: ChatController;
@@ -14,75 +14,79 @@ class ChatController {
   }
 
   public async getToken(chatId: number | string) {
-    const response = await ChatAPI.getToken(chatId);
-    if (response.status === 200) {
-      const resParsed = JSON.parse(response.response);
-      if (apiHasError(resParsed)) return;
-
-      return resParsed.token;
-    }
+    return await ChatAPI.getToken(chatId)
+      .then((response) => {
+        if (typeof response  === 'string') {
+          return JSON.parse(response);
+        }
+      })
+      .then(({token}) => {
+        return token;
+      });
   }
 
   public async getChatsList(search: string | null = null) {
-    const response = await ChatAPI.getChatsList({ title: search ?? '' });
-    if (response.status === 200) {
-      const resParsed = JSON.parse(response.response);
-      if (apiHasError(resParsed)) return;
-
-      return resParsed;
-    }
+    return await ChatAPI.getChatsList({ title: search ?? '' })
+      .then((response) => {
+        if (typeof response  === 'string') {
+          return JSON.parse(response);
+        }
+      });
   }
 
   public async getChatUsers(id: string) {
-    const response = await ChatAPI.getChatUsers(id);
-    if (response.status === 200) {
-      const resParsed = JSON.parse(response.response);
-      if (apiHasError(resParsed)) return;
-
-      return resParsed.map((user: any) => transformUser(user as UserDTO));
-    }
+    return await ChatAPI.getChatUsers(id)
+      .then((response) => {
+        if (typeof response  === 'string') {
+          return JSON.parse(response);
+        }
+      })
+      .then((response) => {
+        return response.map((user: any) => transformUser(user as UserDTO));
+      });
   }
 
   public async addChat(title: string) {
-    const response = await ChatAPI.addChat({ title });
-    if (response.status === 200) {
-      const resParsed = JSON.parse(response.response);
-      if (apiHasError(resParsed)) return;
+    return await ChatAPI.addChat({ title })
+      .then((response) => {
+        if (typeof response  === 'string') {
+          return JSON.parse(response);
+        }
+      })
+      .then((response) => {
+        window.store.dispatch({});
 
-      window.store.dispatch({});
-
-      return resParsed;
-    }
+        return response;
+      });
   }
 
   public async addUser(chatId: number | string, userId: number) {
-    const response = await ChatAPI.addUsers({
-      chatId,
-      users: [userId]
-    });
-
-    if (response.status === 200) {
-      window.store.dispatch({});
-    }
+    return await ChatAPI.addUsers({chatId, users: [userId]})
+      .then(async () => {
+        return await this.getChatUsers(chatId as string);
+      })
+      .then((users) => {
+        const currentChat = window.store.getState().currentChat;
+        window.store.dispatch({currentChat: {...currentChat, users}});
+      });
   }
 
   public async removeUser(chatId: number | string, userId: number) {
-    const response = await ChatAPI.removeUsers({
-      chatId,
-      users: [userId]
+    return await ChatAPI.removeUsers({chatId, users: [userId]})
+    .then(async () => {
+      return await this.getChatUsers(chatId as string);
+    })
+    .then((users) => {
+      const currentChat = window.store.getState().currentChat;
+      window.store.dispatch({currentChat: {...currentChat, users}});
     });
-
-    if (response.status === 200) {
-      window.store.dispatch({});
-    }
   }
 
   public async removeChat(chatId: number | string) {
-    const response = await ChatAPI.removeChat({chatId});
-
-    if (response.status === 200) {
-      window.store.dispatch({currentChat: null});
-    }
+    return await ChatAPI.removeChat({chatId})
+      .then(() => {
+        window.store.dispatch({currentChat: null});
+      });
   }
 
 }

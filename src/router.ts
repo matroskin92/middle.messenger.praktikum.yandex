@@ -55,6 +55,9 @@ export function initRouter(router: Router, store: Store<AppState>) {
    * для переключения активного экрана
    */
   store.on('changed', (prevState, nextState) => {
+
+    localStorage.setItem('current_chat', JSON.stringify(nextState.currentChat));
+
     if (!prevState.appIsInited && nextState.appIsInited) {
       router.start();
     }
@@ -63,9 +66,12 @@ export function initRouter(router: Router, store: Store<AppState>) {
       nextState.screen = location.pathname;
     }
 
-    if (!nextState.user && (nextState.screen !== '/' && nextState.screen !== '/sign-up')) {
+    // Доступные страницы для НЕавторизованных пользователей
+    if (!nextState.user && (nextState.screen !== '/' && nextState.screen !== '/sign-up' && nextState.screen !== '/500' && nextState.screen !== '/404')) {
       router.go('/');
       return;
+
+    // НЕ Доступные страницы для авторизованных пользователей
     } else if (!!nextState.user && (nextState.screen === '/' || nextState.screen === '/sign-up')) {
       router.go('/messenger');
       return;

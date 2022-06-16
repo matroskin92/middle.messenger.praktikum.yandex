@@ -22,37 +22,36 @@ export default class HTTPTransport {
         this.path = route;
     }
 
-    get = (url: string, options: Options = {}) => {
+    get = (url: string, options: Options = {}): Promise<string | void> => {
         return this.request(`${process.env.API_ENDPOINT}/${this.path}/${url}`, {
             ...options, method: Methods.GET
         }, options.timeout);
     };
 
-    post = (url: string, options: Options = {}) => {
+    post = (url: string, options: Options = {}): Promise<string | void> => {
         return this.request(`${process.env.API_ENDPOINT}/${this.path}/${url}`, {
             ...options, method: Methods.POST
         }, options.timeout);
     };
 
-    put = (url: string, options: Options = {}) => {
+    put = (url: string, options: Options = {}): Promise<string | void> => {
         return this.request(`${process.env.API_ENDPOINT}/${this.path}/${url}`, {
             ...options, method: Methods.PUT
         }, options.timeout);
     };
 
-    delete = (url: string, options: Options = {}) => {
+    delete = (url: string, options: Options = {}): Promise<string | void> => {
         return this.request(`${process.env.API_ENDPOINT}/${this.path}/${url}`, {
             ...options, method: Methods.DELETE
         }, options.timeout);
     };
 
-    request = (url: string, options: Options = {}, timeout = 5000) => {
+    request = (url: string, options: Options = {}, timeout = 5000): Promise<string | void> => {
         let { headers = {}, method, data } = options;
 
-        return new Promise(function (resolve, reject) {
+        return new Promise((resolve, reject) => {
             if (!method) {
                 reject('No method');
-                return;
             }
 
             const xhr = new XMLHttpRequest();
@@ -60,7 +59,7 @@ export default class HTTPTransport {
             const isFormData = data instanceof FormData;
 
             xhr.open(
-                method,
+                method as string,
                 isGet && !!data
                     ? `${url}${queryStringify(data)}`
                     : url,
@@ -75,24 +74,40 @@ export default class HTTPTransport {
                 xhr.setRequestHeader(key, headers[key]);
             });
 
-            xhr.onload = function () {
-                resolve(xhr);
+            xhr.onload = () => {
+                if (xhr.status >= 400) {
+                    reject(xhr.response);
+                } else {
+                    resolve(xhr.response);
+                }
             };
 
-            xhr.onabort = reject;
-            xhr.onerror = reject;
             xhr.withCredentials = true;
             xhr.timeout = timeout;
-            xhr.ontimeout = reject;
+
+            xhr.onabort = () => {
+                reject(xhr.response)
+            }
+            xhr.onerror = () => {
+                reject(xhr.response)
+            }
+            xhr.ontimeout = () => {
+                reject(xhr.response)
+            }
 
             if (isGet) {
-                xhr.send()
+                xhr.send();
             } else {
-                xhr.send(data as any)
+                xhr.send(data as any);
             }
         })
+        .then((response): string => {
+            return response as string;
+        })
         .catch((e) => {
-            console.log(e);
+            const error = JSON.parse(e);
+            console.error(error.response);
+            window.store.dispatch({screen: '/500'});
         });
     };
 }
