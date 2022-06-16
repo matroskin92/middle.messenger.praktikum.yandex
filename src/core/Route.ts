@@ -5,12 +5,12 @@ import { isEqual } from '../utils';
 export default class Route {
   private _props: TStringObject;
   private _block: Nullable<Block>;
-  private _blockClass: Block;
+  private _blockClass: typeof Block;
   private _pathname: string;
 
-  constructor(pathname: string, view: Block, props: TStringObject) {
+  constructor(pathname: string, blockClass: typeof Block, props: TStringObject) {
     this._pathname = pathname;
-    this._blockClass = view;
+    this._blockClass = blockClass;
     this._block = null;
     this._props = props;
   }
@@ -38,6 +38,6 @@ export default class Route {
 
   render() {
     this._block = new this._blockClass(this._props);
-    renderDOM(this._props.rootQuery, this._block);
+    renderDOM(this._props.rootQuery, this._block as Block);
   }
 }

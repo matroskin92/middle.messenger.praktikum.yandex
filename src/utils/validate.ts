@@ -70,7 +70,7 @@ function test(name: string, value: string): string {
 export function Validate(data: TStringObject): TStringObject {
   const errors: TStringObject = {};
   for (let key in data) {
-    const result = test(key, data[key]);
+    const result = test(key, data[key] as string);
     errors[key] = result ? result : '';
   }
 

@@ -5,6 +5,7 @@
     "typeRoots": ["node_modules/@types", "src/typings/global.d.ts"],
     "sourceMap": true,
     "esModuleInterop": true,
+    "allowSyntheticDefaultImports": true,
     "forceConsistentCasingInFileNames": true,
     "strict": true,
     "noImplicitAny": true,
