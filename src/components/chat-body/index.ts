@@ -1,1 +1,3 @@
-export { ChatBody as default } from './chat-body';
+import ChatBody from './chat-body';
+
+export { ChatBody as default };

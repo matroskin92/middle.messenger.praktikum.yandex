@@ -5,10 +5,10 @@ export class SigninPage extends Block {
     return `
       <main class="main--center">
         <div class="card">
-          <h1 class="card__title">Вход</h1>
-          {{{Signin}}}
+          <h1 class="card__title">Регистрация</h1>
+          {{{SingUp}}}
           <div class="card-footer">
-            {{{Link text="Уже есть аккаунт?" color="link" size="100" href="index.html#login"}}}
+            {{{Link text="Уже есть аккаунт?" color="link" size="100" href="/"}}}
           </div>
         </div>
       </main>

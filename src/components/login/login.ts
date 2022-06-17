@@ -1,5 +1,7 @@
 import Block from '../../core/Block';
-import Validate from '../../utils/validate';
+import {Validate, isValid} from '../../utils/validate';
+import diffObjectsDeep from '../../utils/diffObjectsDeep';
+import AuthController from '../../controllers/auth';
 
 interface HTMLInputElement {
   value: string,
@@ -11,7 +13,7 @@ interface MouseEvent {
   currentTarget: HTMLInputElement
 }
 
-interface LoginData {
+interface LoginData extends TStringObject {
   login: string,
   password: string
 }
@@ -28,7 +30,7 @@ export class Login extends Block {
         login: '',
         password: '',
       },
-      onSubmit: (event: MouseEvent) => {
+      onSubmit: async (event: MouseEvent) => {
         event?.preventDefault();
 
         const loginData: LoginData = {
@@ -36,17 +38,19 @@ export class Login extends Block {
           password: this.refs.password.querySelector('input')?.value ?? ''
         };
 
+        const ValidationResult = Validate(loginData);
+
         const nextState = {
-          errors: {
-            login: Validate('login', loginData.login),
-            password: Validate('password', loginData.password),
-          },
+          errors: ValidationResult,
           values: { ...loginData },
         };
 
         this.setState(nextState);
 
-        console.log('action/login', loginData);
+        if (isValid(ValidationResult)) {
+          await AuthController.login(loginData);
+        }
+
       },
       onInputValidate: (event: MouseEvent) => {
         const inputName: string = event.currentTarget?.name;
@@ -54,14 +58,16 @@ export class Login extends Block {
         const currentValues = {...this.state.values};
 
         if (inputValue.length === 0 && currentValues[inputName].length === 0) return;
+        if (inputValue === currentValues[inputName]) return;
+
+        const validateResult = Validate({[inputName]: inputValue});
 
         const nextState: Object = {
           values: {...this.state.values, ...Object.defineProperty({...this.state.values}, inputName, {value: inputValue})},
-          errors: {...this.state.errors, ...Object.defineProperty({...this.state.errors}, inputName, {value: Validate(inputName, inputValue)})}
+          errors: {...this.state.errors, ...Object.defineProperty({...this.state.errors}, inputName, {value: validateResult[inputName]})}
         };
 
-        // Плохой метод, но в качестве упрощения
-        if (JSON.stringify({...this.state}) !== JSON.stringify({...nextState}) ) {
+        if (diffObjectsDeep.compareValues(this.state, nextState)) {
           this.setState(nextState);
         }
       }
@@ -82,7 +88,7 @@ export class Login extends Block {
             type="text"
             name="login"
             value="${values.login}"
-            error="${errors.login}"
+            error="${errors && errors.login ? errors.login : ''}"
             onFocus=onInputValidate
             onBlur=onInputValidate
           }}}
@@ -95,7 +101,7 @@ export class Login extends Block {
             type="password"
             name="password"
             value="${values.password}"
-            error="${errors.password}"
+            error="${errors && errors.password ? errors.password : ''}"
             onFocus=onInputValidate
             onBlur=onInputValidate
           }}}

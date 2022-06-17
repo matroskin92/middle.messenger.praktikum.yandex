@@ -1,9 +1,19 @@
+/* eslint-disable no-param-reassign */
+/* eslint-disable @typescript-eslint/no-unused-vars */
+/* eslint-disable no-unused-vars */
+/* eslint-disable no-use-before-define */
+
 import EventBus from './EventBus';
 import {nanoid} from 'nanoid';
 import Handlebars from 'handlebars';
 
 interface BlockMeta<P = any> {
   props: P;
+}
+
+export interface BlockClass<P> extends Function {
+  new (props: P): Block<P>;
+  componentName?: string;
 }
 
 type Events = Values<typeof Block.EVENTS>;
@@ -17,6 +27,7 @@ export default class Block<P = any> {
   } as const;
 
   public id = nanoid(6);
+  // @ts-ignore
   private readonly _meta: BlockMeta;
 
   protected _element: Nullable<HTMLElement> = null;
@@ -58,6 +69,7 @@ export default class Block<P = any> {
     this._element = this._createDocumentElement('div');
   }
 
+  // @ts-ignore
   protected getStateFromProps(props: any): void {
     this.state = {};
   }
@@ -71,10 +83,15 @@ export default class Block<P = any> {
     this.componentDidMount(props);
   }
 
+  // @ts-ignore
   componentDidMount(props: P) {
   }
 
   _componentDidUpdate(oldProps: P, newProps: P) {
+    if (this._element && this._element.style.display === 'none') {
+      return;
+    }
+
     const response = this.componentDidUpdate(oldProps, newProps);
     if (!response) {
       return;
@@ -82,6 +99,7 @@ export default class Block<P = any> {
     this._render();
   }
 
+  // @ts-ignore
   componentDidUpdate(oldProps: P, newProps: P) {
     return true;
   }
@@ -120,24 +138,14 @@ export default class Block<P = any> {
 
   protected render(): string {
     return '';
-  };
+  }
 
   getContent(): HTMLElement {
-    // Хак, чтобы вызвать CDM только после добавления в DOM
-    if (this.element?.parentNode?.nodeType === Node.DOCUMENT_FRAGMENT_NODE) {
-      setTimeout(() => {
-        if (this.element?.parentNode?.nodeType !==  Node.DOCUMENT_FRAGMENT_NODE ) {
-          this.eventBus().emit(Block.EVENTS.FLOW_CDM);
-        }
-      }, 100)
-    }
-
+    this.eventBus().emit(Block.EVENTS.FLOW_CDM);
     return this.element!;
   }
 
   _makePropsProxy(props: any): any {
-    // Можно и так передать this
-    // Такой способ больше не применяется с приходом ES6+
     const self = this;
 
     return new Proxy(props as unknown as object, {
@@ -148,8 +156,6 @@ export default class Block<P = any> {
       set(target: Record<string, unknown>, prop: string, value: unknown) {
         target[prop] = value;
 
-        // Запускаем обновление компоненты
-        // Плохой cloneDeep, в след итерации нужно заставлять добавлять cloneDeep им самим
         self.eventBus().emit(Block.EVENTS.FLOW_CDU, {...target}, target);
         return true;
       },
@@ -216,13 +222,15 @@ export default class Block<P = any> {
       stub.replaceWith(component.getContent());
     });
 
-
     /**
      * Возвращаем фрагмент
      */
     return fragment.content;
   }
 
+  public destroy() {
+    this._element?.remove();
+  }
 
   show() {
     this.getContent().style.display = 'block';

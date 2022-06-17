@@ -1,11 +1,11 @@
 import Block from '../../core/Block';
-
 export class ChatToggle extends Block {
   constructor() {
 
     const onClick = (e: MouseEvent) => {
       e.preventDefault();
-      location.href = 'index.html#chat';
+
+      window.store.dispatch({'screen': '/messenger'});
     }
 
     super({events: { click: onClick }});

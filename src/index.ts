@@ -1,13 +1,6 @@
-import { renderDOM, registerComponent }  from './core';
-import MainPage from './pages/main/index';
-import LoginPage from './pages/login';
-import SigninPage from './pages/signin';
-import NotFoundPage from './pages/not_found';
-import ServerErrorPage from './pages/server_error';
-import ChatPage from './pages/chat';
-import ProfilePage from './pages/profile';
-import ProfileEditPage from './pages/profile-edit';
-import ProfilePasswordPage from './pages/profile-password';
+import { registerComponent, Router, Store }  from './core';
+import { initRouter } from './router';
+import { initApp } from './utils';
 
 import './styles/style.scss';
 
@@ -16,6 +9,7 @@ import Input from './components/input';
 import Textarea from './components/textarea';
 import CustomInput from './components/custom-input';
 import Button from './components/button';
+import Tooltip from './components/tooltip';
 import Error from './components/error';
 import ChatAside from './components/chat-aside';
 import ChatBody from './components/chat-body';
@@ -23,6 +17,7 @@ import ChatProfile from './components/chat-profile';
 import ChatSearch from './components/chat-search';
 import ChatToggle from './components/chat-toggle';
 import ChatTopbar from './components/chat-topbar';
+import ChatAdd from './components/chat-add';
 import ChatMessages from './components/chat-messages';
 import ChatWrite from './components/chat-write';
 import ContactList from './components/contact-list';
@@ -33,19 +28,21 @@ import ProfileControl from './components/profile-control';
 import ProfileEdit from './components/profile-edit';
 import ProfilePassword from './components/profile-password';
 import Login from './components/login';
-import Signin from './components/signin';
+import SingUp from './components/signup';
 
 registerComponent(Link, 'Link');
 registerComponent(Input, 'Input');
 registerComponent(Textarea, 'Textarea');
 registerComponent(CustomInput, 'CustomInput');
 registerComponent(Button, 'Button');
+registerComponent(Tooltip, 'Tooltip');
 registerComponent(Error, 'Error');
 registerComponent(ChatAside, 'ChatAside');
 registerComponent(ChatBody, 'ChatBody');
 registerComponent(ChatSearch, 'ChatSearch');
 registerComponent(ChatProfile, 'ChatProfile');
 registerComponent(ChatToggle, 'ChatToggle');
+registerComponent(ChatAdd, 'ChatAdd');
 registerComponent(ContactList, 'ContactList');
 registerComponent(ContactItem, 'ContactItem');
 registerComponent(ChatTopbar, 'ChatTopbar');
@@ -57,31 +54,26 @@ registerComponent(ProfileControl, 'ProfileControl');
 registerComponent(ProfileEdit, 'ProfileEdit');
 registerComponent(ProfilePassword, 'ProfilePassword');
 registerComponent(Login, 'Login');
-registerComponent(Signin, 'Signin');
+registerComponent(SingUp, 'SingUp');
 
-document.addEventListener("DOMContentLoaded", () => {
-  const currentPage = window.location.hash;
+const defaultState: AppState = {
+  isLoading: false,
+  currentChat: localStorage.getItem('current_chat') ? JSON.parse(localStorage.getItem('current_chat') ?? '') : null,
+  search: '',
+  screen: null,
+  user: null,
+  messages: [],
+  appIsInited: false
+};
 
-  console.log(currentPage);
+document.addEventListener('DOMContentLoaded', () => {
 
-  if (currentPage.includes('login')) {
-    renderDOM(LoginPage);
-  } else if (currentPage.includes('signin')) {
-    renderDOM(SigninPage);
-  } else if (currentPage.includes('404')) {
-    renderDOM(NotFoundPage);
-  } else if (currentPage.includes('500')) {
-    renderDOM(ServerErrorPage);
-  } else if (currentPage.includes('chat')) {
-    renderDOM(ChatPage);
-  } else if (currentPage.includes('profile-edit')) {
-    renderDOM(ProfileEditPage);
-  } else if (currentPage.includes('profile-password')) {
-    renderDOM(ProfilePasswordPage);
-  } else if (currentPage.includes('profile')) {
-    renderDOM(ProfilePage);
-  } else {
-    renderDOM(MainPage);
-  }
+  const store = new Store<AppState>(defaultState);
+  const router = new Router('#app');
 
+  window.router = router;
+  window.store = store;
+
+  initRouter(router, store);
+  store.dispatch(initApp);
 });

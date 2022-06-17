@@ -1,1 +1,3 @@
-export { ProfileEdit as default } from './profile-edit';
+import ProfileEdit from './profile-edit';
+
+export { ProfileEdit as default };

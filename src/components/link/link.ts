@@ -9,7 +9,16 @@ interface LinkProps {
 
 export class Link extends Block {
   constructor({text, color, size, href}: LinkProps) {
-    super({text, color, size, href});
+
+    const onClick = (event: MouseEvent) => {
+      event.preventDefault();
+
+      window.store.dispatch({
+        'screen': this.props.href
+      });
+    };
+
+    super({text, color, size, href, events: {click: onClick}});
   }
 
   render() {

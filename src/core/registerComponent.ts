@@ -1,10 +1,12 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import Block from './Block';
 import Handlebars, { HelperOptions } from 'handlebars';
 
 interface BlockConstructable<Props = any> {
-  new(props: Props): Block;
+  new(props: Props): Block
 }
 
+// @ts-ignore
 export default function registerComponent<Props = any>(Component: BlockConstructable, name: string) {
   Handlebars.registerHelper(name, function ({ hash: { ref, ...hash }, data }: HelperOptions) {
 

@@ -44,6 +44,12 @@
     }
   }
 
+  &__add {
+    flex: 0 0 auto;
+    z-index: 3;
+    border-top: 1px solid #EAEAEA;
+  }
+
   &__toggle {
     position: absolute;
     z-index: 2;
@@ -271,18 +277,14 @@
 
 .chat-topbar {
   display: grid;
-  grid-template-columns: 48px 1fr auto;
-  column-gap: 0.75rem;
+  grid-template-columns: 1fr 160px auto auto;
+  column-gap: 2rem;
   padding: 0.75rem 0;
 
   border-bottom: 1px solid #EAEAEA;
 
   & > * {
     align-self: center;
-  }
-
-  &__avatar {
-    flex: 0 0 auto;
   }
 
   &__name {
@@ -294,7 +296,16 @@
     color: #1E1E1E;
   }
 
-  &__usermenu {
+  &__users {
+    flex: 0 0 auto;
+  }
+
+  &__add {
+    position: relative;
+    flex: 0 0 auto;
+  }
+
+  &__remove {
     flex: 0 0 auto;
   }
 }
@@ -316,6 +327,7 @@
   flex-direction: column;
   align-items: flex-start;
   justify-content: flex-end;
+  height: 100%;
   padding-bottom: 0.75rem;
 
   &__date {
@@ -485,5 +497,17 @@
     margin: 0;
     padding: 0;
     cursor: pointer;
+  }
+}
+
+.chat-add {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  column-gap: 12px;
+  align-items: center;
+  padding: 12px;
+
+  input {
+    padding: 0 12px!important;
   }
 }

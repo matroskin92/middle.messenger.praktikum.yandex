@@ -1,4 +1,4 @@
-export default function Validate(name: string, value: string): string {
+function test(name: string, value: string): string {
 
   const patterns:{ [key: string]: RegExp } = {
     'name': /^[-a-zA-Zа-яА-ЯёЁ0-9\s]+$/,
@@ -34,7 +34,7 @@ export default function Validate(name: string, value: string): string {
     }
   }
 
-  if (name === 'password' || name === 'password2') {
+  if (name === 'password' || name === 'password2' || name === 'oldPassword' || name === 'newPassword') {
     if (value.length < 8 || value.length > 40) {
       return 'Пароль должен быть больше 8 и меньше 40 символов';
     } else if (value.search(/[A-Z]/) === -1 || value.search(/[0-9]/) === -1) {
@@ -58,13 +58,30 @@ export default function Validate(name: string, value: string): string {
     }
   }
 
-  if (name === 'message') {
+  if (name === 'message' || name === 'chat_add') {
     if (value.length === 0) {
-      return 'Сообщение не должно быть пустым';
+      return 'Не должно быть пустым';
     }
   }
 
   return '';
+}
 
-  // return 'Проблема в валидаторе';
+export function Validate(data: TStringObject): TStringObject {
+  const errors: TStringObject = {};
+  for (let key in data) {
+    const result = test(key, data[key] as string);
+    errors[key] = result ? result : '';
+  }
+
+  return errors;
+}
+
+export function isValid(data: TStringObject): boolean {
+  let hasError: boolean = false;
+  for (let key in data) {
+    hasError = (Boolean(data[key]?.length) || hasError) ?? false;
+  }
+
+  return !hasError;
 }

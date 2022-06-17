@@ -2,15 +2,16 @@
   "compilerOptions": {
     "target": "es2017",
     "module": "commonjs",
-    "typeRoots": ["node_modules/@types", "typings/app.d.ts"],
+    "typeRoots": ["node_modules/@types", "src/typings/global.d.ts"],
     "sourceMap": true,
     "esModuleInterop": true,
+    "allowSyntheticDefaultImports": true,
     "forceConsistentCasingInFileNames": true,
     "strict": true,
     "noImplicitAny": true,
     "strictNullChecks": true,
     "noUnusedLocals": true,
     "noUnusedParameters": true,
-    "skipLibCheck": true
-  }
+    "skipLibCheck": true,
+  },
 }

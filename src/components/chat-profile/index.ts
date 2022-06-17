@@ -1,1 +1,3 @@
-export { ChatProfile as default } from './chat-profile';
+import ChatProfile from './chat-profile';
+
+export { ChatProfile as default };
