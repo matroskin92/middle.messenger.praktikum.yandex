@@ -13,5 +13,5 @@
 - `npm run start` — запуск приложения
 - `npm run dev` — для разработчика
 
-## Ссылка на Netlify
-[Demo](https://thriving-marigold-e97349.netlify.app/)
+## Ссылка на Heroku
+[Demo](https://floating-tor-61885.herokuapp.com/)
