@@ -19,6 +19,16 @@
       }
     }
   },
+  "lint-staged": {
+    "*.ts": "npm run lint:js",
+    "*.scss": "npm run lint:css"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "npm lint:all",
+      "pre-push": "npm test"
+    }
+  },
   "devDependencies": {
     "@anikin/parcel-transformer-handlebars": "1.0.2",
     "@babel/core": "7.18.5",
