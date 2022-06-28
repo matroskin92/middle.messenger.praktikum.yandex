@@ -1,7 +1,7 @@
-import Block from '../../core/Block';
-import {Validate, isValid} from '../../utils/validate';
-import diffObjectsDeep from '../../utils/diffObjectsDeep';
-import AuthController from '../../controllers/auth';
+import Block from '@/core/Block';
+import {Validate, isValid} from '@/utils/validate';
+import diffObjectsDeep from '@/utils/diffObjectsDeep';
+import AuthController from '@/controllers/auth';
 
 export class SingUp extends Block {
 

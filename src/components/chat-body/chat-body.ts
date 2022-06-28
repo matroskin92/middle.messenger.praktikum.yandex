@@ -1,7 +1,7 @@
-import Block from '../../core/Block';
-import storeConnect from '../../hoc/store-connect';
-import messageController from '../../controllers/message';
-import ChatController from '../../controllers/chat';
+import Block from '@/core/Block';
+import storeConnect from '@/hoc/store-connect';
+import messageController from '@/controllers/message';
+import ChatController from '@/controllers/chat';
 
 class ChatBody extends Block {
 

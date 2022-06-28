@@ -1,5 +1,5 @@
-import Block from '../../core/Block';
-import storeConnect from '../../hoc/store-connect';
+import Block from '@/core/Block';
+import storeConnect from '@/hoc/store-connect';
 
 class ChatProfile extends Block {
   constructor(props: any) {

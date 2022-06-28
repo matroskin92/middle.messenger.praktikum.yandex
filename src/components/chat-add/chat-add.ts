@@ -1,6 +1,6 @@
-import Block from '../../core/Block';
-import { Validate, isValid } from '../../utils/validate';
-import ChatController from '../../controllers/chat';
+import Block from '@/core/Block';
+import { Validate, isValid } from '@/utils/validate';
+import ChatController from '@/controllers/chat';
 
 export class ChatAdd extends Block {
 

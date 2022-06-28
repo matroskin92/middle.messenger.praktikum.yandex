@@ -1,5 +1,5 @@
-import Block from '../../core/Block';
-import AuthController from '../../controllers/auth';
+import Block from '@/core/Block';
+import AuthController from '@/controllers/auth';
 
 export class ProfileControl extends Block {
 

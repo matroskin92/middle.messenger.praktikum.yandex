@@ -1,4 +1,5 @@
 const HtmlWebpackPlugin = require('html-webpack-plugin');
+const TsconfigPathsPlugin = require('tsconfig-paths-webpack-plugin');
 const Dotenv = require('dotenv-webpack');
 const path = require('path');
 
@@ -10,13 +11,16 @@ module.exports = {
   plugins: [
     new Dotenv(),
     new HtmlWebpackPlugin({
-      template: path.resolve(__dirname, '../src/index.html'),
+      template: path.resolve(__dirname, '../src/index.html')
     }),
   ],
   resolve: {
     extensions: ['.ts', '.js', '.json'],
+    plugins: [new TsconfigPathsPlugin()],
     alias: {
       handlebars: 'handlebars/dist/handlebars.min.js',
+      '@': path.resolve(__dirname, '../src'),
+      '@core': path.resolve(__dirname, '../src/core'),
     },
   },
   module: {

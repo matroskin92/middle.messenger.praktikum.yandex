@@ -1,4 +1,4 @@
-import HTTPTransport from '../core/HTTPTransport';
+import HTTPTransport from '@/core/HTTPTransport';
 import {UsersData, AddChatData, RemoveChatData, ChatListData} from './types';
 
 class ChatAPI {

@@ -1,4 +1,4 @@
-import HTTPTransport from '../core/HTTPTransport';
+import HTTPTransport from '@/core/HTTPTransport';
 import {LoginData, SignUpData} from './types';
 
 class AuthAPI {

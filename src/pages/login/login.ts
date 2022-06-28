@@ -1,4 +1,4 @@
-import Block from '../../core/Block';
+import Block from '@/core/Block';
 
 export class LoginPage extends Block {
   render() {
