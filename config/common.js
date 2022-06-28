@@ -20,7 +20,6 @@ module.exports = {
     alias: {
       handlebars: 'handlebars/dist/handlebars.min.js',
       '@': path.resolve(__dirname, '../src'),
-      '@core': path.resolve(__dirname, '../src/core'),
     },
   },
   module: {
