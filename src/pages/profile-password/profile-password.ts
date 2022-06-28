@@ -1,4 +1,4 @@
-import Block from '../../core/Block';
+import Block from '@/core/Block';
 
 export class ProfilePasswordPage extends Block {
   render() {

@@ -1,4 +1,4 @@
-import Block from '../../core/Block';
+import Block from '@/core/Block';
 
 export class ChatSearch extends Block {
 

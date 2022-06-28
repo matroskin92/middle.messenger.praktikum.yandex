@@ -1,4 +1,4 @@
-import HTTPTransport from '../core/HTTPTransport';
+import HTTPTransport from '@/core/HTTPTransport';
 import {ProfileData, PasswordData, SearchUserData} from './types';
 
 class ProfileAPI {

@@ -1,5 +1,5 @@
-import Block from '../../core/Block';
-import ChatController from '../../controllers/chat';
+import Block from '@/core/Block';
+import ChatController from '@/controllers/chat';
 
 interface Contact {
   id: string;

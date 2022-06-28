@@ -1,4 +1,4 @@
-import Block from '../../core/Block';
+import Block from '@/core/Block';
 export class ChatToggle extends Block {
   constructor() {
 

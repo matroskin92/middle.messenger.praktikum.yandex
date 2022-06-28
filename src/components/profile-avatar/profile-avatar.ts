@@ -1,5 +1,5 @@
-import Block from '../../core/Block';
-import ProfileController from '../../controllers/profile';
+import Block from '@/core/Block';
+import ProfileController from '@/controllers/profile';
 
 export class ProfileAvatar extends Block {
 

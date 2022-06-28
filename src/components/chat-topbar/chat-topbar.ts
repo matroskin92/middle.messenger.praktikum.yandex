@@ -1,6 +1,6 @@
-import Block from '../../core/Block';
-import ChatController from '../../controllers/chat';
-import ProfileController from '../../controllers/profile';
+import Block from '@/core/Block';
+import ChatController from '@/controllers/chat';
+import ProfileController from '@/controllers/profile';
 
 export class ChatTopbar extends Block {
 

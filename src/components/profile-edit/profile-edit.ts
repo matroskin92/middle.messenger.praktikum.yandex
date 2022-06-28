@@ -1,8 +1,8 @@
-import Block from '../../core/Block';
-import storeConnect from '../../hoc/store-connect';
-import {Validate, isValid} from '../../utils/validate';
-import diffObjectsDeep from '../../utils/diffObjectsDeep';
-import ProfileController from '../../controllers/profile';
+import Block from '@/core/Block';
+import storeConnect from '@/hoc/store-connect';
+import {Validate, isValid} from '@/utils/validate';
+import diffObjectsDeep from '@/utils/diffObjectsDeep';
+import ProfileController from '@/controllers/profile';
 
 class ProfileEdit extends Block {
 
